@@ -2,7 +2,7 @@
 
 The omp.jl package provides OpenMP APIs in Julia.
 
-[![omp.jl software stack](docs/figures/omp-jl.pdf)](docs/figures/omp-jl.pdf)
+[![omp.jl software stack](docs/figures/omp-jl.png)](docs/figures/omp-jl.pdf)
 
 # Installation
 - TODO
