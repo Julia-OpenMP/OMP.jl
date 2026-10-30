@@ -1,0 +1,3 @@
+var documenterSearchIndex = {"docs":
+[{"category":"section","location":"#OMP.jl","page":"Home","text":"OpenMP APIs in Julia, built upon omp-abi.","title":"OMP.jl"},{"category":"section","location":"#Introspection","page":"Home","text":"","title":"Introspection"},{"category":"function","location":"#OMP.backend","page":"Home","text":"backend()\n\nName of the OpenMP runtime targeted by omp-abi (e.g. \"gcc\", \"llvm\").\n\n\n\n\n\n","title":"OMP.backend"},{"category":"function","location":"#OMP.dialect","page":"Home","text":"dialect()\n\nABI dialect used to talk to the OpenMP runtime (\"gomp\" or \"kmp\").\n\n\n\n\n\n","title":"OMP.dialect"}]
+}
