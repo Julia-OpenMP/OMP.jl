@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="805.31354mm"
+   height="126.5948mm"
+   viewBox="0 0 805.31354 126.5948"
+   version="1.1"
+   id="svg864"
+   inkscape:version="1.1.2 (0a00cf5339, 2022-02-04)"
+   sodipodi:docname="design.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview866"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.12724549"
+     inkscape:cx="2180.8238"
+     inkscape:cy="1952.9179"
+     inkscape:window-width="1850"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs861" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(296.49322,138.47112)">
+    <g
+       id="g4723"
+       transform="translate(-629.42802,190.40868)" />
+    <g
+       id="g33713">
+      <rect
+         style="fill:#000000;fill-opacity:0.510528;fill-rule:evenodd;stroke-width:0.427791;-inkscape-stroke:none;paint-order:stroke fill markers;stop-color:#000000"
+         id="rect1183"
+         width="804.39758"
+         height="125.99576"
+         x="-295.57727"
+         y="-137.87209" />
+      <g
+         id="g5796"
+         transform="translate(-601.24503,190.40868)">
+        <rect
+           style="fill:#c5deb4;fill-opacity:1;stroke:#00001c;stroke-width:1.19808;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000"
+           id="rect882"
+           width="799.01404"
+           height="49.768097"
+           x="305.66776"
+           y="-328.28076" />
+        <text
+           xml:space="preserve"
+           style="font-style:normal;font-weight:normal;font-size:17.33px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.433252"
+           x="709.65826"
+           y="-309.16022"
+           id="text2228"><tspan
+             sodipodi:role="line"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;stroke-width:0.433252"
+             x="709.65826"
+             y="-309.16022"
+             id="tspan5572">omp.jl<tspan
+   style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+   id="tspan1118"></tspan></tspan><tspan
+             sodipodi:role="line"
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;stroke-width:0.433252"
+             x="709.65826"
+             y="-287.49771"
+             id="tspan4924"><tspan
+               style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:sans-serif"
+               id="tspan4926">A Julia package that implements front-end macros.</tspan></tspan></text>
+      </g>
+      <rect
+         style="font-variation-settings:normal;fill:#b5c3de;fill-opacity:1;stroke:#00001c;stroke-width:1.83189;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000"
+         id="rect7513-2"
+         width="399.50699"
+         height="71.375275"
+         x="-295.57727"
+         y="-88.103981" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:17.33px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.433252"
+         x="-95.143379"
+         y="-46.458797"
+         id="text77013"><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;stroke-width:0.433252"
+           x="-95.143372"
+           y="-46.458797"
+           id="tspan5533">A Reusable compiler infrastructure and</tspan><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;stroke-width:0.433252"
+           x="-95.143379"
+           y="-24.796297"
+           id="tspan12886">tooling for implementing GPU compilers</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:17.33px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.433252"
+         x="-94.448189"
+         y="-66.920784"
+         id="text14641"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;stroke-width:0.433252"
+           x="-94.448189"
+           y="-66.920784"
+           id="tspan14637">GPUCompiler.jl</tspan><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;stroke-width:0.433252"
+           x="-94.448189"
+           y="-45.258286"
+           id="tspan14639" /></text>
+      <rect
+         style="font-variation-settings:normal;fill:#b5c3de;fill-opacity:1;stroke:#00001c;stroke-width:1.83189;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:fill markers stroke;stop-color:#000000"
+         id="rect15312"
+         width="399.50699"
+         height="71.375275"
+         x="103.92971"
+         y="-88.103981" />
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:17.33px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.433252"
+         x="304.36362"
+         y="-46.458797"
+         id="text15318"><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;stroke-width:0.433252"
+           x="304.36362"
+           y="-46.458797"
+           id="tspan25810">A portable OpenMP application binary</tspan><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;stroke-width:0.433252"
+           x="304.36362"
+           y="-24.796297"
+           id="tspan30494">interface (ABI) - LLVM, GCC, MPC, XKOMP</tspan></text>
+      <text
+         xml:space="preserve"
+         style="font-style:normal;font-weight:normal;font-size:17.33px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.433252"
+         x="305.05881"
+         y="-66.920784"
+         id="text15324"><tspan
+           sodipodi:role="line"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;stroke-width:0.433252"
+           x="305.05881"
+           y="-66.920784"
+           id="tspan15320">omp-abi</tspan><tspan
+           sodipodi:role="line"
+           style="text-align:center;text-anchor:middle;stroke-width:0.433252"
+           x="305.05881"
+           y="-45.258286"
+           id="tspan15322" /></text>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="303.89258"
+       y="-68.343002"
+       id="text22692"><tspan
+         sodipodi:role="line"
+         id="tspan22690"
+         style="stroke-width:0.264583"
+         x="303.89258"
+         y="-68.343002"></tspan></text>
+  </g>
+</svg>
