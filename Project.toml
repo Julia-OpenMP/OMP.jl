@@ -1,0 +1,23 @@
+name = "OMP"
+uuid = "8bfe3126-a470-4c94-995c-71ef2e805e8a"
+authors = ["Romain PEREIRA <rpereira@anl.gov>"]
+version = "0.1.0"
+
+[workspace]
+projects = ["test", "docs", "examples", "deps", "res"]
+
+[deps]
+CEnum = "fa961155-64e5-5f13-b03f-caf6b980ea82"
+OMPABI_jll = "3215a6dd-3518-5385-95c6-e35c85970e8c"
+Preferences = "21216c6a-2e73-6563-6e65-726566657250"
+
+[compat]
+CEnum = "0.4, 0.5"
+OMPABI_jll = "0.1"
+Preferences = "1.4"
+julia = "1.10"
+
+# OMPABI_jll is not registered yet: built from contrib/yggdrasil and published on
+# GitHub. Remove this section once it is in the General registry.
+[sources]
+OMPABI_jll = {url = "https://github.com/Julia-OpenMP/OMPABI_jll.jl"}
