@@ -17,6 +17,10 @@ function parallel_count(num_threads)
 end
 
 @testset "OMP.jl" begin
+    @testset "frontend" begin
+        include("frontend.jl")
+    end
+
     @testset "Aqua" begin
         Aqua.test_all(OMP)
     end

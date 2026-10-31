@@ -8,3 +8,11 @@ OpenMP APIs in Julia, built upon [omp-abi](https://github.com/Julia-OpenMP/omp-a
 OMP.backend
 OMP.dialect
 ```
+
+## Directives
+
+```@docs
+@pragma
+@omp
+OpenMPSyntaxError
+```

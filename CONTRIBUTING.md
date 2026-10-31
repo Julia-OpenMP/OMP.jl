@@ -8,3 +8,7 @@ Please open issues at [https://github.com/Julia-OpenMP/OMP.jl/issues](https://gi
 
 ## Pull requests
 We strongly recommend any external contributors to reach-out with the team first ([Contact](https://github.com/Julia-OpenMP#contact)).
+
+## Generated code
+`lib/` and `src/frontend/generated/` are generated (see the README): do not edit them by hand,
+change their generator instead.
