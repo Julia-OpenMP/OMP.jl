@@ -5,6 +5,10 @@
 # The include dir defaults to the omp-abi installed by `deps/build_local.jl`.
 # Bindings should be generated from a USE_DYNAMIC build, the configuration
 # shipped to users.
+#
+# omp-abi prefixes the OpenMP API (omp-abi/api.h) with `omp_abi_`: the bindings
+# keep the names of omp.h (`omp_abi_omp_get_num_threads` -> `omp_get_num_threads`,
+# `omp_abi_omp_lock_t` -> `omp_lock_t`), calling the prefixed C symbols.
 
 using Clang.Generators
 using Scratch
@@ -40,8 +44,20 @@ function main()
 
     headers = [joinpath(bindgen_dir, "omp-abi", "omp-abi.h")]
     ctx = create_context(headers, args, options)
-    build!(ctx)
+    build!(ctx, BUILDSTAGE_NO_PRINTING)
+    for node in ctx.dag.nodes
+        map!(api_names, node.exprs, node.exprs)
+    end
+    build!(ctx, BUILDSTAGE_PRINTING_ONLY)
     return
 end
+
+# The names of the OpenMP API: drop the `omp_abi_` prefix of `omp_abi_omp_*`
+# identifiers. The C symbol of a `@ccall` (`libompabi.omp_abi_omp_get_num_threads`)
+# is a QuoteNode, and keeps it.
+const API_PREFIX = "omp_abi_omp_"
+api_names(s::Symbol) = startswith(string(s), API_PREFIX) ? Symbol(chopprefix(string(s), "omp_abi_")) : s
+api_names(e::Expr) = Expr(e.head, map(api_names, e.args)...)
+api_names(x) = x
 
 isinteractive() || main()

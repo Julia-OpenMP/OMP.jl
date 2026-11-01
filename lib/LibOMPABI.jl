@@ -18,49 +18,120 @@ const OMP_ABI_KERNEL_ARGS_FLAG_STRICT_BLOCKS_AND_THREADS = UInt64(1) << 6
 
 
 
-const omp_interop_t = Cptrdiff_t
-
-@cenum omp_sched_t::UInt32 begin
-    omp_sched_static = 0x0000000000000001
-    omp_sched_dynamic = 0x0000000000000002
-    omp_sched_guided = 0x0000000000000003
-    omp_sched_auto = 0x0000000000000004
-    omp_sched_monotonic = 0x0000000080000000
-end
-
-@cenum omp_proc_bind_t::UInt32 begin
-    omp_proc_bind_false = 0
-    omp_proc_bind_true = 1
-    omp_proc_bind_primary = 2
-    omp_proc_bind_master = 2
-    omp_proc_bind_close = 3
-    omp_proc_bind_spread = 4
-end
-
 struct omp_lock_t
-    _lk::Ptr{Cvoid}
+    _opaque::NTuple{4, Ptr{Cvoid}}
 end
 
 struct omp_nest_lock_t
-    _lk::Ptr{Cvoid}
-    _count::Cint
+    _opaque::NTuple{4, Ptr{Cvoid}}
 end
-
-@cenum omp_sync_hint_t::UInt32 begin
-    omp_sync_hint_none = 0
-    omp_sync_hint_uncontended = 1
-    omp_sync_hint_contended = 2
-    omp_sync_hint_nonspeculative = 4
-    omp_sync_hint_speculative = 8
-end
-
-const omp_lock_hint_t = omp_sync_hint_t
 
 struct omp_depend_t
-    __opaque::NTuple{16, Cchar}
+    _opaque::NTuple{2, Ptr{Cvoid}}
 end
 
 const omp_event_handle_t = Csize_t
+
+const omp_interop_t = Cptrdiff_t
+
+const omp_mempartition_t = Ptr{Cvoid}
+
+const omp_mempartitioner_t = Ptr{Cvoid}
+
+@cenum omp_access_t::UInt32 begin
+    omp_access_cgroup = 0
+    omp_access_pteam = 1
+end
+
+@cenum omp_allocator_handle_t::UInt64 begin
+    omp_null_allocator = 0x0000000000000000
+    omp_default_mem_alloc = 0x0000000000000001
+    omp_large_cap_mem_alloc = 0x0000000000000002
+    omp_const_mem_alloc = 0x0000000000000003
+    omp_high_bw_mem_alloc = 0x0000000000000004
+    omp_low_lat_mem_alloc = 0x0000000000000005
+    omp_cgroup_mem_alloc = 0x0000000000000006
+    omp_pteam_mem_alloc = 0x0000000000000007
+    omp_thread_mem_alloc = 0x0000000000000008
+    OMP_ABI_ALLOCATOR_HANDLE_MAX = 0x7fffffffffffffff
+end
+
+@cenum omp_alloctrait_key_t::UInt32 begin
+    omp_atk_sync_hint = 1
+    omp_atk_alignment = 2
+    omp_atk_access = 3
+    omp_atk_pool_size = 4
+    omp_atk_fallback = 5
+    omp_atk_fb_data = 6
+    omp_atk_pinned = 7
+    omp_atk_partition = 8
+    omp_atk_pin_device = 9
+    omp_atk_preferred_device = 10
+    omp_atk_device_access = 11
+    omp_atk_target_access = 12
+    omp_atk_atomic_scope = 13
+    omp_atk_part_size = 14
+    omp_atk_partitioner = 15
+    omp_atk_partitioner_arg = 16
+end
+
+const omp_intptr_t = Cptrdiff_t
+
+const omp_alloctrait_val_t = omp_intptr_t
+
+struct omp_alloctrait_t
+    key::omp_alloctrait_key_t
+    value::omp_alloctrait_val_t
+end
+
+@cenum omp_alloctrait_value_t::Int32 begin
+    omp_atv_default = -1
+    omp_atv_false = 0
+    omp_atv_true = 1
+    omp_atv_contended = 3
+    omp_atv_uncontended = 4
+    omp_atv_serialized = 5
+    omp_atv_private = 6
+    omp_atv_device = 7
+    omp_atv_thread = 8
+    omp_atv_pteam = 9
+    omp_atv_cgroup = 10
+    omp_atv_default_mem_fb = 11
+    omp_atv_null_fb = 12
+    omp_atv_abort_fb = 13
+    omp_atv_allocator_fb = 14
+    omp_atv_environment = 15
+    omp_atv_nearest = 16
+    omp_atv_blocked = 17
+    omp_atv_interleaved = 18
+    omp_atv_all = 19
+    omp_atv_single = 20
+    omp_atv_multiple = 21
+    omp_atv_memspace = 22
+    omp_atv_partitioner = 23
+end
+
+@cenum omp_control_tool_result_t::Int32 begin
+    omp_control_tool_notool = -2
+    omp_control_tool_nocallback = -1
+    omp_control_tool_success = 0
+    omp_control_tool_ignored = 1
+end
+
+@cenum omp_control_tool_t::UInt32 begin
+    omp_control_tool_start = 1
+    omp_control_tool_pause = 2
+    omp_control_tool_flush = 3
+    omp_control_tool_end = 4
+    omp_control_tool_max = 2147483647
+end
+
+@cenum omp_impex_t::UInt32 begin
+    omp_not_impex = 0
+    omp_import = 1
+    omp_export = 2
+    omp_impex = 3
+end
 
 @cenum omp_interop_fr_t::UInt32 begin
     omp_ifr_cuda = 1
@@ -70,6 +141,7 @@ const omp_event_handle_t = Csize_t
     omp_ifr_hip = 5
     omp_ifr_level_zero = 6
     omp_ifr_hsa = 7
+    omp_ifr_last = 7
 end
 
 @cenum omp_interop_property_t::Int32 begin
@@ -96,85 +168,611 @@ end
     omp_irc_other = -6
 end
 
-const omp_uintptr_t = Csize_t
-
-@cenum omp_memspace_handle_t::UInt32 begin
-    omp_default_mem_space = 0
+@cenum omp_memspace_handle_t::Int64 begin
+    omp_default_mem_space = -1
+    omp_null_mem_space = 0
     omp_large_cap_mem_space = 1
     omp_const_mem_space = 2
     omp_high_bw_mem_space = 3
     omp_low_lat_mem_space = 4
+    omp_cgroup_mem_space = 5
+    OMP_ABI_MEMSPACE_HANDLE_MAX = 9223372036854775807
 end
 
-@cenum omp_allocator_handle_t::UInt32 begin
-    omp_null_allocator = 0
-    omp_default_mem_alloc = 1
-    omp_large_cap_mem_alloc = 2
-    omp_const_mem_alloc = 3
-    omp_high_bw_mem_alloc = 4
-    omp_low_lat_mem_alloc = 5
-    omp_cgroup_mem_alloc = 6
-    omp_pteam_mem_alloc = 7
-    omp_thread_mem_alloc = 8
+# typedef void ( * omp_abi_omp_mempartitioner_compute_proc_t ) ( omp_abi_omp_memspace_handle_t memspace , size_t allocation_size , omp_abi_omp_alloctrait_val_t partitioner_arg , omp_abi_omp_mempartition_t * partition )
+const omp_mempartitioner_compute_proc_t = Ptr{Cvoid}
+
+@cenum omp_mempartitioner_lifetime_t::UInt32 begin
+    omp_static_mempartition = 1
+    omp_allocator_mempartition = 2
+    omp_dynamic_mempartition = 3
 end
 
-@cenum omp_alloctrait_key_t::UInt32 begin
-    omp_atk_sync_hint = 1
-    omp_atk_alignment = 2
-    omp_atk_access = 3
-    omp_atk_pool_size = 4
-    omp_atk_fallback = 5
-    omp_atk_fb_data = 6
-    omp_atk_pinned = 7
-    omp_atk_partition = 8
-end
-
-@cenum omp_alloctrait_value_t::Int32 begin
-    omp_atv_false = 0
-    omp_atv_true = 1
-    omp_atv_contended = 3
-    omp_atv_uncontended = 4
-    omp_atv_sequential = 5
-    omp_atv_private = 6
-    omp_atv_all = 7
-    omp_atv_thread = 8
-    omp_atv_pteam = 9
-    omp_atv_cgroup = 10
-    omp_atv_default_mem_fb = 11
-    omp_atv_null_fb = 12
-    omp_atv_abort_fb = 13
-    omp_atv_allocator_fb = 14
-    omp_atv_environment = 15
-    omp_atv_nearest = 16
-    omp_atv_blocked = 17
-    omp_atv_interleaved = 18
-    omp_atv_default = -1
-end
-
-struct omp_alloctrait_t
-    key::omp_alloctrait_key_t
-    value::omp_uintptr_t
-end
-
-@cenum omp_control_tool_result_t::Int32 begin
-    omp_control_tool_notool = -2
-    omp_control_tool_nocallback = -1
-    omp_control_tool_success = 0
-    omp_control_tool_ignored = 1
-end
-
-@cenum omp_control_tool_t::UInt32 begin
-    omp_control_tool_start = 1
-    omp_control_tool_pause = 2
-    omp_control_tool_flush = 3
-    omp_control_tool_end = 4
-end
+# typedef void ( * omp_abi_omp_mempartitioner_release_proc_t ) ( omp_abi_omp_mempartition_t * partition )
+const omp_mempartitioner_release_proc_t = Ptr{Cvoid}
 
 @cenum omp_pause_resource_t::UInt32 begin
-    omp_pause_resume = 0
     omp_pause_soft = 1
     omp_pause_hard = 2
     omp_pause_stop_tool = 3
+end
+
+@cenum omp_proc_bind_t::UInt32 begin
+    omp_proc_bind_false = 0
+    omp_proc_bind_true = 1
+    omp_proc_bind_primary = 2
+    omp_proc_bind_close = 3
+    omp_proc_bind_spread = 4
+end
+
+@cenum omp_sched_t::UInt32 begin
+    omp_sched_static = 0x0000000000000001
+    omp_sched_dynamic = 0x0000000000000002
+    omp_sched_guided = 0x0000000000000003
+    omp_sched_auto = 0x0000000000000004
+    omp_sched_monotonic = 0x0000000080000000
+end
+
+@cenum omp_sync_hint_t::UInt32 begin
+    omp_sync_hint_none = 0
+    omp_sync_hint_uncontended = 1
+    omp_sync_hint_contended = 2
+    omp_sync_hint_nonspeculative = 4
+    omp_sync_hint_speculative = 8
+end
+
+const omp_uintptr_t = Csize_t
+
+function omp_aligned_alloc(alignment, size, allocator)
+    @ccall libompabi.omp_abi_omp_aligned_alloc(alignment::Csize_t, size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+end
+
+function omp_aligned_calloc(alignment, nmemb, size, allocator)
+    @ccall libompabi.omp_abi_omp_aligned_calloc(alignment::Csize_t, nmemb::Csize_t, size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+end
+
+function omp_alloc(size, allocator)
+    @ccall libompabi.omp_abi_omp_alloc(size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+end
+
+function omp_ancestor_is_free_agent(level)
+    @ccall libompabi.omp_abi_omp_ancestor_is_free_agent(level::Cint)::Cint
+end
+
+function omp_calloc(nmemb, size, allocator)
+    @ccall libompabi.omp_abi_omp_calloc(nmemb::Csize_t, size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+end
+
+function omp_capture_affinity(buffer, size, format)
+    @ccall libompabi.omp_abi_omp_capture_affinity(buffer::Cstring, size::Csize_t, format::Cstring)::Csize_t
+end
+
+function omp_control_tool(command, modifier, arg)
+    @ccall libompabi.omp_abi_omp_control_tool(command::omp_control_tool_t, modifier::Cint, arg::Ptr{Cvoid})::omp_control_tool_result_t
+end
+
+function omp_destroy_allocator(allocator)
+    @ccall libompabi.omp_abi_omp_destroy_allocator(allocator::omp_allocator_handle_t)::Cvoid
+end
+
+function omp_destroy_lock(svar)
+    @ccall libompabi.omp_abi_omp_destroy_lock(svar::Ptr{omp_lock_t})::Cvoid
+end
+
+function omp_destroy_mempartition(partition)
+    @ccall libompabi.omp_abi_omp_destroy_mempartition(partition::Ptr{omp_mempartition_t})::Cvoid
+end
+
+function omp_destroy_mempartitioner(partitioner)
+    @ccall libompabi.omp_abi_omp_destroy_mempartitioner(partitioner::Ptr{omp_mempartitioner_t})::Cvoid
+end
+
+function omp_destroy_nest_lock(nvar)
+    @ccall libompabi.omp_abi_omp_destroy_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
+end
+
+function omp_display_affinity(format)
+    @ccall libompabi.omp_abi_omp_display_affinity(format::Cstring)::Cvoid
+end
+
+function omp_display_env(verbose)
+    @ccall libompabi.omp_abi_omp_display_env(verbose::Cint)::Cvoid
+end
+
+function omp_free(ptr, allocator)
+    @ccall libompabi.omp_abi_omp_free(ptr::Ptr{Cvoid}, allocator::omp_allocator_handle_t)::Cvoid
+end
+
+function omp_fulfill_event(event)
+    @ccall libompabi.omp_abi_omp_fulfill_event(event::omp_event_handle_t)::Cvoid
+end
+
+function omp_get_active_level()
+    @ccall libompabi.omp_abi_omp_get_active_level()::Cint
+end
+
+function omp_get_affinity_format(buffer, size)
+    @ccall libompabi.omp_abi_omp_get_affinity_format(buffer::Cstring, size::Csize_t)::Csize_t
+end
+
+function omp_get_ancestor_thread_num(level)
+    @ccall libompabi.omp_abi_omp_get_ancestor_thread_num(level::Cint)::Cint
+end
+
+function omp_get_cancellation()
+    @ccall libompabi.omp_abi_omp_get_cancellation()::Cint
+end
+
+function omp_get_default_allocator()
+    @ccall libompabi.omp_abi_omp_get_default_allocator()::omp_allocator_handle_t
+end
+
+function omp_get_default_device()
+    @ccall libompabi.omp_abi_omp_get_default_device()::Cint
+end
+
+function omp_get_device_allocator(dev, memspace)
+    @ccall libompabi.omp_abi_omp_get_device_allocator(dev::Cint, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+end
+
+function omp_get_device_and_host_allocator(dev, memspace)
+    @ccall libompabi.omp_abi_omp_get_device_and_host_allocator(dev::Cint, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+end
+
+function omp_get_device_and_host_memspace(dev, memspace)
+    @ccall libompabi.omp_abi_omp_get_device_and_host_memspace(dev::Cint, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+end
+
+function omp_get_device_distances(ndevs, devs, distances)
+    @ccall libompabi.omp_abi_omp_get_device_distances(ndevs::Cint, devs::Ptr{Cint}, distances::Ptr{Cint})::Cvoid
+end
+
+function omp_get_device_from_uid(uid)
+    @ccall libompabi.omp_abi_omp_get_device_from_uid(uid::Cstring)::Cint
+end
+
+function omp_get_device_memspace(dev, memspace)
+    @ccall libompabi.omp_abi_omp_get_device_memspace(dev::Cint, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+end
+
+function omp_get_device_num()
+    @ccall libompabi.omp_abi_omp_get_device_num()::Cint
+end
+
+function omp_get_device_num_teams(device_num)
+    @ccall libompabi.omp_abi_omp_get_device_num_teams(device_num::Cint)::Cint
+end
+
+function omp_get_device_teams_thread_limit(device_num)
+    @ccall libompabi.omp_abi_omp_get_device_teams_thread_limit(device_num::Cint)::Cint
+end
+
+function omp_get_devices_all_allocator(memspace)
+    @ccall libompabi.omp_abi_omp_get_devices_all_allocator(memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+end
+
+function omp_get_devices_all_memspace(memspace)
+    @ccall libompabi.omp_abi_omp_get_devices_all_memspace(memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+end
+
+function omp_get_devices_allocator(ndevs, devs, memspace)
+    @ccall libompabi.omp_abi_omp_get_devices_allocator(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+end
+
+function omp_get_devices_and_host_allocator(ndevs, devs, memspace)
+    @ccall libompabi.omp_abi_omp_get_devices_and_host_allocator(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+end
+
+function omp_get_devices_and_host_memspace(ndevs, devs, memspace)
+    @ccall libompabi.omp_abi_omp_get_devices_and_host_memspace(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+end
+
+function omp_get_devices_memspace(ndevs, devs, memspace)
+    @ccall libompabi.omp_abi_omp_get_devices_memspace(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+end
+
+function omp_get_dyn_gprivate_memspace(access_group)
+    @ccall libompabi.omp_abi_omp_get_dyn_gprivate_memspace(access_group::omp_access_t)::omp_memspace_handle_t
+end
+
+function omp_get_dyn_gprivate_nofb_ptr(offset, access_group)
+    @ccall libompabi.omp_abi_omp_get_dyn_gprivate_nofb_ptr(offset::Csize_t, access_group::omp_access_t)::Ptr{Cvoid}
+end
+
+function omp_get_dyn_gprivate_ptr(offset, access_group)
+    @ccall libompabi.omp_abi_omp_get_dyn_gprivate_ptr(offset::Csize_t, access_group::omp_access_t)::Ptr{Cvoid}
+end
+
+function omp_get_dyn_gprivate_size(access_group)
+    @ccall libompabi.omp_abi_omp_get_dyn_gprivate_size(access_group::omp_access_t)::Csize_t
+end
+
+function omp_get_dynamic()
+    @ccall libompabi.omp_abi_omp_get_dynamic()::Cint
+end
+
+function omp_get_filtered_devices(filter, ndevs, devs)
+    @ccall libompabi.omp_abi_omp_get_filtered_devices(filter::Cstring, ndevs::Cint, devs::Ptr{Cint})::Cint
+end
+
+function omp_get_gprivate_limit(device_num, access_group)
+    @ccall libompabi.omp_abi_omp_get_gprivate_limit(device_num::Cint, access_group::omp_access_t)::Csize_t
+end
+
+function omp_get_initial_device()
+    @ccall libompabi.omp_abi_omp_get_initial_device()::Cint
+end
+
+function omp_get_interop_int(interop, property_id, ret_code)
+    @ccall libompabi.omp_abi_omp_get_interop_int(interop::omp_interop_t, property_id::omp_interop_property_t, ret_code::Ptr{omp_interop_rc_t})::omp_intptr_t
+end
+
+function omp_get_interop_name(interop, property_id)
+    @ccall libompabi.omp_abi_omp_get_interop_name(interop::omp_interop_t, property_id::omp_interop_property_t)::Cstring
+end
+
+function omp_get_interop_ptr(interop, property_id, ret_code)
+    @ccall libompabi.omp_abi_omp_get_interop_ptr(interop::omp_interop_t, property_id::omp_interop_property_t, ret_code::Ptr{omp_interop_rc_t})::Ptr{Cvoid}
+end
+
+function omp_get_interop_rc_desc(interop, ret_code)
+    @ccall libompabi.omp_abi_omp_get_interop_rc_desc(interop::omp_interop_t, ret_code::omp_interop_rc_t)::Cstring
+end
+
+function omp_get_interop_str(interop, property_id, ret_code)
+    @ccall libompabi.omp_abi_omp_get_interop_str(interop::omp_interop_t, property_id::omp_interop_property_t, ret_code::Ptr{omp_interop_rc_t})::Cstring
+end
+
+function omp_get_interop_type_desc(interop, property_id)
+    @ccall libompabi.omp_abi_omp_get_interop_type_desc(interop::omp_interop_t, property_id::omp_interop_property_t)::Cstring
+end
+
+function omp_get_level()
+    @ccall libompabi.omp_abi_omp_get_level()::Cint
+end
+
+function omp_get_mapped_ptr(ptr, device_num)
+    @ccall libompabi.omp_abi_omp_get_mapped_ptr(ptr::Ptr{Cvoid}, device_num::Cint)::Ptr{Cvoid}
+end
+
+function omp_get_max_active_levels()
+    @ccall libompabi.omp_abi_omp_get_max_active_levels()::Cint
+end
+
+function omp_get_max_progress_width(device_num)
+    @ccall libompabi.omp_abi_omp_get_max_progress_width(device_num::Cint)::Cint
+end
+
+function omp_get_max_task_priority()
+    @ccall libompabi.omp_abi_omp_get_max_task_priority()::Cint
+end
+
+function omp_get_max_teams()
+    @ccall libompabi.omp_abi_omp_get_max_teams()::Cint
+end
+
+function omp_get_max_threads()
+    @ccall libompabi.omp_abi_omp_get_max_threads()::Cint
+end
+
+function omp_get_memspace_num_resources(memspace)
+    @ccall libompabi.omp_abi_omp_get_memspace_num_resources(memspace::omp_memspace_handle_t)::Cint
+end
+
+function omp_get_memspace_pagesize(memspace)
+    @ccall libompabi.omp_abi_omp_get_memspace_pagesize(memspace::omp_memspace_handle_t)::Csize_t
+end
+
+function omp_get_num_devices()
+    @ccall libompabi.omp_abi_omp_get_num_devices()::Cint
+end
+
+function omp_get_num_interop_properties(interop)
+    @ccall libompabi.omp_abi_omp_get_num_interop_properties(interop::omp_interop_t)::Cint
+end
+
+function omp_get_num_places()
+    @ccall libompabi.omp_abi_omp_get_num_places()::Cint
+end
+
+function omp_get_num_procs()
+    @ccall libompabi.omp_abi_omp_get_num_procs()::Cint
+end
+
+function omp_get_num_teams()
+    @ccall libompabi.omp_abi_omp_get_num_teams()::Cint
+end
+
+function omp_get_num_teams_dim(dim)
+    @ccall libompabi.omp_abi_omp_get_num_teams_dim(dim::Cint)::Cint
+end
+
+function omp_get_num_threads()
+    @ccall libompabi.omp_abi_omp_get_num_threads()::Cint
+end
+
+function omp_get_num_threads_dim(dim)
+    @ccall libompabi.omp_abi_omp_get_num_threads_dim(dim::Cint)::Cint
+end
+
+function omp_get_partition_num_places()
+    @ccall libompabi.omp_abi_omp_get_partition_num_places()::Cint
+end
+
+function omp_get_partition_place_nums(place_nums)
+    @ccall libompabi.omp_abi_omp_get_partition_place_nums(place_nums::Ptr{Cint})::Cvoid
+end
+
+function omp_get_place_num()
+    @ccall libompabi.omp_abi_omp_get_place_num()::Cint
+end
+
+function omp_get_place_num_procs(place_num)
+    @ccall libompabi.omp_abi_omp_get_place_num_procs(place_num::Cint)::Cint
+end
+
+function omp_get_place_proc_ids(place_num, ids)
+    @ccall libompabi.omp_abi_omp_get_place_proc_ids(place_num::Cint, ids::Ptr{Cint})::Cvoid
+end
+
+function omp_get_proc_bind()
+    @ccall libompabi.omp_abi_omp_get_proc_bind()::omp_proc_bind_t
+end
+
+function omp_get_schedule(kind, chunk_size)
+    @ccall libompabi.omp_abi_omp_get_schedule(kind::Ptr{omp_sched_t}, chunk_size::Ptr{Cint})::Cvoid
+end
+
+function omp_get_submemspace(memspace, num_resources, resources)
+    @ccall libompabi.omp_abi_omp_get_submemspace(memspace::omp_memspace_handle_t, num_resources::Cint, resources::Ptr{Cint})::omp_memspace_handle_t
+end
+
+function omp_get_supported_active_league_dims(device_num, native_support)
+    @ccall libompabi.omp_abi_omp_get_supported_active_league_dims(device_num::Cint, native_support::Cint)::Cint
+end
+
+function omp_get_supported_active_levels()
+    @ccall libompabi.omp_abi_omp_get_supported_active_levels()::Cint
+end
+
+function omp_get_supported_active_team_dims(device_num, native_support)
+    @ccall libompabi.omp_abi_omp_get_supported_active_team_dims(device_num::Cint, native_support::Cint)::Cint
+end
+
+function omp_get_supported_teams_dim(device_num, dim)
+    @ccall libompabi.omp_abi_omp_get_supported_teams_dim(device_num::Cint, dim::Cint)::Cint
+end
+
+function omp_get_supported_threads_dim(device_num, dim)
+    @ccall libompabi.omp_abi_omp_get_supported_threads_dim(device_num::Cint, dim::Cint)::Cint
+end
+
+function omp_get_team_num()
+    @ccall libompabi.omp_abi_omp_get_team_num()::Cint
+end
+
+function omp_get_team_num_dim(dim)
+    @ccall libompabi.omp_abi_omp_get_team_num_dim(dim::Cint)::Cint
+end
+
+function omp_get_team_size(level)
+    @ccall libompabi.omp_abi_omp_get_team_size(level::Cint)::Cint
+end
+
+function omp_get_teams_thread_limit()
+    @ccall libompabi.omp_abi_omp_get_teams_thread_limit()::Cint
+end
+
+function omp_get_thread_limit()
+    @ccall libompabi.omp_abi_omp_get_thread_limit()::Cint
+end
+
+function omp_get_thread_limit_dim(dim)
+    @ccall libompabi.omp_abi_omp_get_thread_limit_dim(dim::Cint)::Cint
+end
+
+function omp_get_thread_num()
+    @ccall libompabi.omp_abi_omp_get_thread_num()::Cint
+end
+
+function omp_get_thread_num_dim(dim)
+    @ccall libompabi.omp_abi_omp_get_thread_num_dim(dim::Cint)::Cint
+end
+
+function omp_get_uid_from_device(device_num)
+    @ccall libompabi.omp_abi_omp_get_uid_from_device(device_num::Cint)::Cstring
+end
+
+function omp_get_wtick()
+    @ccall libompabi.omp_abi_omp_get_wtick()::Cdouble
+end
+
+function omp_get_wtime()
+    @ccall libompabi.omp_abi_omp_get_wtime()::Cdouble
+end
+
+function omp_in_explicit_task()
+    @ccall libompabi.omp_abi_omp_in_explicit_task()::Cint
+end
+
+function omp_in_final()
+    @ccall libompabi.omp_abi_omp_in_final()::Cint
+end
+
+function omp_in_parallel()
+    @ccall libompabi.omp_abi_omp_in_parallel()::Cint
+end
+
+function omp_init_allocator(memspace, ntraits, traits)
+    @ccall libompabi.omp_abi_omp_init_allocator(memspace::omp_memspace_handle_t, ntraits::Cint, traits::Ptr{omp_alloctrait_t})::omp_allocator_handle_t
+end
+
+function omp_init_lock(svar)
+    @ccall libompabi.omp_abi_omp_init_lock(svar::Ptr{omp_lock_t})::Cvoid
+end
+
+function omp_init_lock_with_hint(svar, hint)
+    @ccall libompabi.omp_abi_omp_init_lock_with_hint(svar::Ptr{omp_lock_t}, hint::omp_sync_hint_t)::Cvoid
+end
+
+function omp_init_mempartition(partition, nparts, user_data)
+    @ccall libompabi.omp_abi_omp_init_mempartition(partition::Ptr{omp_mempartition_t}, nparts::Csize_t, user_data::Ptr{Cvoid})::Cvoid
+end
+
+function omp_init_mempartitioner(partitioner, lifetime, compute_proc, release_proc)
+    @ccall libompabi.omp_abi_omp_init_mempartitioner(partitioner::Ptr{omp_mempartitioner_t}, lifetime::omp_mempartitioner_lifetime_t, compute_proc::omp_mempartitioner_compute_proc_t, release_proc::omp_mempartitioner_release_proc_t)::Cvoid
+end
+
+function omp_init_nest_lock(nvar)
+    @ccall libompabi.omp_abi_omp_init_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
+end
+
+function omp_init_nest_lock_with_hint(nvar, hint)
+    @ccall libompabi.omp_abi_omp_init_nest_lock_with_hint(nvar::Ptr{omp_nest_lock_t}, hint::omp_sync_hint_t)::Cvoid
+end
+
+function omp_is_free_agent()
+    @ccall libompabi.omp_abi_omp_is_free_agent()::Cint
+end
+
+function omp_is_initial_device()
+    @ccall libompabi.omp_abi_omp_is_initial_device()::Cint
+end
+
+function omp_mempartition_get_user_data(partition)
+    @ccall libompabi.omp_abi_omp_mempartition_get_user_data(partition::Ptr{omp_mempartition_t})::Ptr{Cvoid}
+end
+
+function omp_mempartition_set_part(partition, part, resource, size)
+    @ccall libompabi.omp_abi_omp_mempartition_set_part(partition::Ptr{omp_mempartition_t}, part::Csize_t, resource::Cint, size::Csize_t)::Cint
+end
+
+function omp_pause_resource(kind, device_num)
+    @ccall libompabi.omp_abi_omp_pause_resource(kind::omp_pause_resource_t, device_num::Cint)::Cint
+end
+
+function omp_pause_resource_all(kind)
+    @ccall libompabi.omp_abi_omp_pause_resource_all(kind::omp_pause_resource_t)::Cint
+end
+
+function omp_realloc(ptr, size, allocator, free_allocator)
+    @ccall libompabi.omp_abi_omp_realloc(ptr::Ptr{Cvoid}, size::Csize_t, allocator::omp_allocator_handle_t, free_allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+end
+
+function omp_set_affinity_format(format)
+    @ccall libompabi.omp_abi_omp_set_affinity_format(format::Cstring)::Cvoid
+end
+
+function omp_set_default_allocator(allocator)
+    @ccall libompabi.omp_abi_omp_set_default_allocator(allocator::omp_allocator_handle_t)::Cvoid
+end
+
+function omp_set_default_device(device_num)
+    @ccall libompabi.omp_abi_omp_set_default_device(device_num::Cint)::Cvoid
+end
+
+function omp_set_device_num_teams(num_teams, device_num)
+    @ccall libompabi.omp_abi_omp_set_device_num_teams(num_teams::Cint, device_num::Cint)::Cvoid
+end
+
+function omp_set_device_teams_thread_limit(thread_limit, device_num)
+    @ccall libompabi.omp_abi_omp_set_device_teams_thread_limit(thread_limit::Cint, device_num::Cint)::Cvoid
+end
+
+function omp_set_dynamic(dynamic_threads)
+    @ccall libompabi.omp_abi_omp_set_dynamic(dynamic_threads::Cint)::Cvoid
+end
+
+function omp_set_lock(svar)
+    @ccall libompabi.omp_abi_omp_set_lock(svar::Ptr{omp_lock_t})::Cvoid
+end
+
+function omp_set_max_active_levels(max_levels)
+    @ccall libompabi.omp_abi_omp_set_max_active_levels(max_levels::Cint)::Cvoid
+end
+
+function omp_set_nest_lock(nvar)
+    @ccall libompabi.omp_abi_omp_set_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
+end
+
+function omp_set_num_teams(num_teams)
+    @ccall libompabi.omp_abi_omp_set_num_teams(num_teams::Cint)::Cvoid
+end
+
+function omp_set_num_threads(num_threads)
+    @ccall libompabi.omp_abi_omp_set_num_threads(num_threads::Cint)::Cvoid
+end
+
+function omp_set_schedule(kind, chunk_size)
+    @ccall libompabi.omp_abi_omp_set_schedule(kind::omp_sched_t, chunk_size::Cint)::Cvoid
+end
+
+function omp_set_teams_thread_limit(thread_limit)
+    @ccall libompabi.omp_abi_omp_set_teams_thread_limit(thread_limit::Cint)::Cvoid
+end
+
+function omp_target_alloc(size, device_num)
+    @ccall libompabi.omp_abi_omp_target_alloc(size::Csize_t, device_num::Cint)::Ptr{Cvoid}
+end
+
+function omp_target_associate_ptr(host_ptr, device_ptr, size, device_offset, device_num)
+    @ccall libompabi.omp_abi_omp_target_associate_ptr(host_ptr::Ptr{Cvoid}, device_ptr::Ptr{Cvoid}, size::Csize_t, device_offset::Csize_t, device_num::Cint)::Cint
+end
+
+function omp_target_disassociate_ptr(ptr, device_num)
+    @ccall libompabi.omp_abi_omp_target_disassociate_ptr(ptr::Ptr{Cvoid}, device_num::Cint)::Cint
+end
+
+function omp_target_free(device_ptr, device_num)
+    @ccall libompabi.omp_abi_omp_target_free(device_ptr::Ptr{Cvoid}, device_num::Cint)::Cvoid
+end
+
+function omp_target_is_accessible(ptr, size, device_num)
+    @ccall libompabi.omp_abi_omp_target_is_accessible(ptr::Ptr{Cvoid}, size::Csize_t, device_num::Cint)::Cint
+end
+
+function omp_target_is_present(ptr, device_num)
+    @ccall libompabi.omp_abi_omp_target_is_present(ptr::Ptr{Cvoid}, device_num::Cint)::Cint
+end
+
+function omp_target_memcpy(dst, src, length, dst_offset, src_offset, dst_device_num, src_device_num)
+    @ccall libompabi.omp_abi_omp_target_memcpy(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, length::Csize_t, dst_offset::Csize_t, src_offset::Csize_t, dst_device_num::Cint, src_device_num::Cint)::Cint
+end
+
+function omp_target_memcpy_async(dst, src, length, dst_offset, src_offset, dst_device_num, src_device_num, depobj_count, depobj_list)
+    @ccall libompabi.omp_abi_omp_target_memcpy_async(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, length::Csize_t, dst_offset::Csize_t, src_offset::Csize_t, dst_device_num::Cint, src_device_num::Cint, depobj_count::Cint, depobj_list::Ptr{omp_depend_t})::Cint
+end
+
+function omp_target_memcpy_rect(dst, src, element_size, num_dims, volume, dst_offsets, src_offsets, dst_dimensions, src_dimensions, dst_device_num, src_device_num)
+    @ccall libompabi.omp_abi_omp_target_memcpy_rect(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, element_size::Csize_t, num_dims::Cint, volume::Ptr{Csize_t}, dst_offsets::Ptr{Csize_t}, src_offsets::Ptr{Csize_t}, dst_dimensions::Ptr{Csize_t}, src_dimensions::Ptr{Csize_t}, dst_device_num::Cint, src_device_num::Cint)::Cint
+end
+
+function omp_target_memcpy_rect_async(dst, src, element_size, num_dims, volume, dst_offsets, src_offsets, dst_dimensions, src_dimensions, dst_device_num, src_device_num, depobj_count, depobj_list)
+    @ccall libompabi.omp_abi_omp_target_memcpy_rect_async(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, element_size::Csize_t, num_dims::Cint, volume::Ptr{Csize_t}, dst_offsets::Ptr{Csize_t}, src_offsets::Ptr{Csize_t}, dst_dimensions::Ptr{Csize_t}, src_dimensions::Ptr{Csize_t}, dst_device_num::Cint, src_device_num::Cint, depobj_count::Cint, depobj_list::Ptr{omp_depend_t})::Cint
+end
+
+function omp_target_memset(ptr, val, count, device_num)
+    @ccall libompabi.omp_abi_omp_target_memset(ptr::Ptr{Cvoid}, val::Cint, count::Csize_t, device_num::Cint)::Ptr{Cvoid}
+end
+
+function omp_target_memset_async(ptr, val, count, device_num, depobj_count, depobj_list)
+    @ccall libompabi.omp_abi_omp_target_memset_async(ptr::Ptr{Cvoid}, val::Cint, count::Csize_t, device_num::Cint, depobj_count::Cint, depobj_list::Ptr{omp_depend_t})::Ptr{Cvoid}
+end
+
+function omp_test_lock(svar)
+    @ccall libompabi.omp_abi_omp_test_lock(svar::Ptr{omp_lock_t})::Cint
+end
+
+function omp_test_nest_lock(nvar)
+    @ccall libompabi.omp_abi_omp_test_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cint
+end
+
+function omp_unset_lock(svar)
+    @ccall libompabi.omp_abi_omp_unset_lock(svar::Ptr{omp_lock_t})::Cvoid
+end
+
+function omp_unset_nest_lock(nvar)
+    @ccall libompabi.omp_abi_omp_unset_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
 end
 
 const omp_abi_task_handle_t = Ptr{Cvoid}
@@ -340,6 +938,10 @@ function omp_abi_dialect_name()
     @ccall libompabi.omp_abi_dialect_name()::Cstring
 end
 
+function omp_abi_has_routine(name)
+    @ccall libompabi.omp_abi_has_routine(name::Cstring)::Cint
+end
+
 function omp_abi_parallel(fn, data, num_threads, flags)
     @ccall libompabi.omp_abi_parallel(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, num_threads::Cuint, flags::Cuint)::Cvoid
 end
@@ -376,7 +978,19 @@ function omp_abi_taskyield()
     @ccall libompabi.omp_abi_taskyield()::Cvoid
 end
 
-const omp_interop_none = omp_interop_t(0)
+const OMP_ABI_OPENMP_VERSION = "6.1"
+
+const OMP_ABI_OPENMP_SPEC_REVISION = "10689d455"
+
+const omp_interop_none = 0
+
+const omp_default_device = -33
+
+const omp_initial_device = -1
+
+const omp_invalid_device = -42
+
+const omp_unassigned_thread = -42
 
 const OMP_ABI_DEVICE_DEFAULT = -1
 

@@ -1,4 +1,4 @@
-# Run with: julia --project=examples examples/hello.jl
+# Run with: julia --project=examples examples/hello-from-abi.jl
 using OMP
 
 println("omp-abi backend: $(OMP.backend()) (dialect: $(OMP.dialect()))")
