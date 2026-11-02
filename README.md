@@ -9,9 +9,11 @@ It builds upon [GPUCompiler.jl](https://github.com/JuliaGPU/GPUCompiler.jl) and 
 OMP.jl and its binary dependency, `OMPABI_jll`, are distributed through the
 [Julia-OpenMP registry](https://github.com/Julia-OpenMP/Registry):
 ```julia
-pkg> registry add https://github.com/Julia-OpenMP/Registry
+pkg> registry add General https://github.com/Julia-OpenMP/Registry
 pkg> add OMP
 ```
+While OMP.jl is private, `git` needs a GitHub token (e.g. in `~/.git-credentials`) and Pkg must use
+it: `export JULIA_PKG_USE_CLI_GIT=true`.
 No compiler or system OpenMP runtime is needed: omp-abi comes prebuilt as an
 artifact (Linux only for now), and the OpenMP runtime is the `libgomp` shipped with Julia.
 
