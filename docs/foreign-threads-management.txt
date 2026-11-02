@@ -1,0 +1,34 @@
+Running Julia code on OpenMP threads (OMP.jl)
+
+OpenMP worker threads are foreign to Julia: a @cfunction adopts them on first entry
+(jl_adopt_thread). The primary thread waits in the runtime (fork/join barrier) while the
+workers run Julia code. Two Julia services can then deadlock:
+
+1. I/O (println from a worker hangs forever)
+   - Only the I/O-loop thread (thread 1, usually the primary) runs libuv. A worker writing
+     to stdout waits for it, and it is blocked in the OpenMP join: deadlock.
+     Julia issues #55525 (fixed by #55529), #47201, #59640.
+   - Fix: fork wraps the region in jl_enter_threaded_region / jl_exit_threaded_region,
+     as Threads.@threads does: any thread may then run the I/O loop.
+     (Base.Experimental.make_io_thread() also fixes it, but changes the whole process:
+     left to the user.)
+
+2. GC (a GC waits for every thread to reach a safepoint)
+   - A thread inside C code that is not marked GC-safe never reaches one: if it blocks
+     (join barrier, omp_set_lock, ...) while another thread collects, deadlock.
+     FFTW.jl (spin lock without safepoint, fixed by FFTW.jl #205), Julia #59640.
+   - Fix: every LibOMPABI binding is `@ccall gc_safe = true` (res/wrap.jl). omp-abi
+     never touches Julia objects, so it is safe; the parallel callback re-enters Julia
+     through the @cfunction, which switches back to GC-unsafe. Needs Julia >= 1.12
+     (OMP.jl requires 1.13).
+   - Pitfall: the exported jl_gc_safe_enter() / jl_gc_safe_leave(state) take no ptls
+     (the ptls prototype in julia_threads.h is for the static analyzer only).
+
+Also: an exception in a thread is caught (run_region) and rethrown after the join as a
+CapturedException; an uncaught exception would kill a foreign thread.
+
+Tests (test/backend.jl, "I/O and GC in regions"): workers print to a pipe; one thread
+collects while another blocks in omp_set_lock. Run such tests under `timeout -s KILL 20`:
+a deadlocked Julia ignores SIGTERM.
+
+Code: OMP.jl/src/backend/runtime.jl (fork), OMP.jl/res/wrap.jl (gc_safe).
