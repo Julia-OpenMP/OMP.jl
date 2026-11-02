@@ -15,7 +15,7 @@ Preferences = "21216c6a-2e73-6563-6e65-726566657250"
 CEnum = "0.4, 0.5"
 OMPABI_jll = "0.1"
 Preferences = "1.4"
-julia = "1.10"
+julia = "1.13"
 
 # OMPABI_jll is not registered yet: built from contrib/yggdrasil and published on
 # GitHub. Remove this section once it is in the General registry.

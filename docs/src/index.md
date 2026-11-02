@@ -15,6 +15,7 @@ OMP.dialect
 @pragma
 @omp
 OpenMPSyntaxError
+OMP.reduction_identity
 ```
 
 ## API routines

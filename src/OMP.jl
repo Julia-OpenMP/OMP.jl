@@ -38,6 +38,10 @@ include("frontend/Frontend.jl")
 using .Frontend: @pragma, @omp, OpenMPSyntaxError
 export @pragma, @omp, OpenMPSyntaxError
 
+# Code generation of the directives, on omp-abi
+include("backend/Backend.jl")
+using .Backend: reduction_identity
+
 """
     backend()
 

@@ -25,6 +25,10 @@ end
         include("api.jl")
     end
 
+    @testset "backend" begin
+        include("backend.jl")
+    end
+
     @testset "Aqua" begin
         Aqua.test_all(OMP)
     end

@@ -57,7 +57,7 @@ Directives that are valid Julia syntax, i.e. without Julia keywords (`for`, `if`
 Syntax errors are reported at macro expansion time as [`OpenMPSyntaxError`](@ref)s.
 """
 macro pragma(args...)
-    return lower(parse_macro(args, __source__; prefix = true), __module__)
+    return esc(lower(parse_macro(args, __source__; prefix = true), __module__))
 end
 
 """
@@ -66,7 +66,7 @@ end
 Same as [`@pragma "omp ..."`](@ref @pragma), e.g. `@omp "parallel for" for i in 1:n ... end`.
 """
 macro omp(args...)
-    return lower(parse_macro(args, __source__; prefix = false), __module__)
+    return esc(lower(parse_macro(args, __source__; prefix = false), __module__))
 end
 
 """

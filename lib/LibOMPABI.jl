@@ -223,555 +223,555 @@ end
 const omp_uintptr_t = Csize_t
 
 function omp_aligned_alloc(alignment, size, allocator)
-    @ccall libompabi.omp_abi_omp_aligned_alloc(alignment::Csize_t, size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_aligned_alloc(alignment::Csize_t, size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
 end
 
 function omp_aligned_calloc(alignment, nmemb, size, allocator)
-    @ccall libompabi.omp_abi_omp_aligned_calloc(alignment::Csize_t, nmemb::Csize_t, size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_aligned_calloc(alignment::Csize_t, nmemb::Csize_t, size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
 end
 
 function omp_alloc(size, allocator)
-    @ccall libompabi.omp_abi_omp_alloc(size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_alloc(size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
 end
 
 function omp_ancestor_is_free_agent(level)
-    @ccall libompabi.omp_abi_omp_ancestor_is_free_agent(level::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_ancestor_is_free_agent(level::Cint)::Cint
 end
 
 function omp_calloc(nmemb, size, allocator)
-    @ccall libompabi.omp_abi_omp_calloc(nmemb::Csize_t, size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_calloc(nmemb::Csize_t, size::Csize_t, allocator::omp_allocator_handle_t)::Ptr{Cvoid}
 end
 
 function omp_capture_affinity(buffer, size, format)
-    @ccall libompabi.omp_abi_omp_capture_affinity(buffer::Cstring, size::Csize_t, format::Cstring)::Csize_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_capture_affinity(buffer::Cstring, size::Csize_t, format::Cstring)::Csize_t
 end
 
 function omp_control_tool(command, modifier, arg)
-    @ccall libompabi.omp_abi_omp_control_tool(command::omp_control_tool_t, modifier::Cint, arg::Ptr{Cvoid})::omp_control_tool_result_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_control_tool(command::omp_control_tool_t, modifier::Cint, arg::Ptr{Cvoid})::omp_control_tool_result_t
 end
 
 function omp_destroy_allocator(allocator)
-    @ccall libompabi.omp_abi_omp_destroy_allocator(allocator::omp_allocator_handle_t)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_destroy_allocator(allocator::omp_allocator_handle_t)::Cvoid
 end
 
 function omp_destroy_lock(svar)
-    @ccall libompabi.omp_abi_omp_destroy_lock(svar::Ptr{omp_lock_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_destroy_lock(svar::Ptr{omp_lock_t})::Cvoid
 end
 
 function omp_destroy_mempartition(partition)
-    @ccall libompabi.omp_abi_omp_destroy_mempartition(partition::Ptr{omp_mempartition_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_destroy_mempartition(partition::Ptr{omp_mempartition_t})::Cvoid
 end
 
 function omp_destroy_mempartitioner(partitioner)
-    @ccall libompabi.omp_abi_omp_destroy_mempartitioner(partitioner::Ptr{omp_mempartitioner_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_destroy_mempartitioner(partitioner::Ptr{omp_mempartitioner_t})::Cvoid
 end
 
 function omp_destroy_nest_lock(nvar)
-    @ccall libompabi.omp_abi_omp_destroy_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_destroy_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
 end
 
 function omp_display_affinity(format)
-    @ccall libompabi.omp_abi_omp_display_affinity(format::Cstring)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_display_affinity(format::Cstring)::Cvoid
 end
 
 function omp_display_env(verbose)
-    @ccall libompabi.omp_abi_omp_display_env(verbose::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_display_env(verbose::Cint)::Cvoid
 end
 
 function omp_free(ptr, allocator)
-    @ccall libompabi.omp_abi_omp_free(ptr::Ptr{Cvoid}, allocator::omp_allocator_handle_t)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_free(ptr::Ptr{Cvoid}, allocator::omp_allocator_handle_t)::Cvoid
 end
 
 function omp_fulfill_event(event)
-    @ccall libompabi.omp_abi_omp_fulfill_event(event::omp_event_handle_t)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_fulfill_event(event::omp_event_handle_t)::Cvoid
 end
 
 function omp_get_active_level()
-    @ccall libompabi.omp_abi_omp_get_active_level()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_active_level()::Cint
 end
 
 function omp_get_affinity_format(buffer, size)
-    @ccall libompabi.omp_abi_omp_get_affinity_format(buffer::Cstring, size::Csize_t)::Csize_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_affinity_format(buffer::Cstring, size::Csize_t)::Csize_t
 end
 
 function omp_get_ancestor_thread_num(level)
-    @ccall libompabi.omp_abi_omp_get_ancestor_thread_num(level::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_ancestor_thread_num(level::Cint)::Cint
 end
 
 function omp_get_cancellation()
-    @ccall libompabi.omp_abi_omp_get_cancellation()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_cancellation()::Cint
 end
 
 function omp_get_default_allocator()
-    @ccall libompabi.omp_abi_omp_get_default_allocator()::omp_allocator_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_default_allocator()::omp_allocator_handle_t
 end
 
 function omp_get_default_device()
-    @ccall libompabi.omp_abi_omp_get_default_device()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_default_device()::Cint
 end
 
 function omp_get_device_allocator(dev, memspace)
-    @ccall libompabi.omp_abi_omp_get_device_allocator(dev::Cint, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_device_allocator(dev::Cint, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
 end
 
 function omp_get_device_and_host_allocator(dev, memspace)
-    @ccall libompabi.omp_abi_omp_get_device_and_host_allocator(dev::Cint, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_device_and_host_allocator(dev::Cint, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
 end
 
 function omp_get_device_and_host_memspace(dev, memspace)
-    @ccall libompabi.omp_abi_omp_get_device_and_host_memspace(dev::Cint, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_device_and_host_memspace(dev::Cint, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
 end
 
 function omp_get_device_distances(ndevs, devs, distances)
-    @ccall libompabi.omp_abi_omp_get_device_distances(ndevs::Cint, devs::Ptr{Cint}, distances::Ptr{Cint})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_device_distances(ndevs::Cint, devs::Ptr{Cint}, distances::Ptr{Cint})::Cvoid
 end
 
 function omp_get_device_from_uid(uid)
-    @ccall libompabi.omp_abi_omp_get_device_from_uid(uid::Cstring)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_device_from_uid(uid::Cstring)::Cint
 end
 
 function omp_get_device_memspace(dev, memspace)
-    @ccall libompabi.omp_abi_omp_get_device_memspace(dev::Cint, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_device_memspace(dev::Cint, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
 end
 
 function omp_get_device_num()
-    @ccall libompabi.omp_abi_omp_get_device_num()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_device_num()::Cint
 end
 
 function omp_get_device_num_teams(device_num)
-    @ccall libompabi.omp_abi_omp_get_device_num_teams(device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_device_num_teams(device_num::Cint)::Cint
 end
 
 function omp_get_device_teams_thread_limit(device_num)
-    @ccall libompabi.omp_abi_omp_get_device_teams_thread_limit(device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_device_teams_thread_limit(device_num::Cint)::Cint
 end
 
 function omp_get_devices_all_allocator(memspace)
-    @ccall libompabi.omp_abi_omp_get_devices_all_allocator(memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_devices_all_allocator(memspace::omp_memspace_handle_t)::omp_allocator_handle_t
 end
 
 function omp_get_devices_all_memspace(memspace)
-    @ccall libompabi.omp_abi_omp_get_devices_all_memspace(memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_devices_all_memspace(memspace::omp_memspace_handle_t)::omp_memspace_handle_t
 end
 
 function omp_get_devices_allocator(ndevs, devs, memspace)
-    @ccall libompabi.omp_abi_omp_get_devices_allocator(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_devices_allocator(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
 end
 
 function omp_get_devices_and_host_allocator(ndevs, devs, memspace)
-    @ccall libompabi.omp_abi_omp_get_devices_and_host_allocator(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_devices_and_host_allocator(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_allocator_handle_t
 end
 
 function omp_get_devices_and_host_memspace(ndevs, devs, memspace)
-    @ccall libompabi.omp_abi_omp_get_devices_and_host_memspace(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_devices_and_host_memspace(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
 end
 
 function omp_get_devices_memspace(ndevs, devs, memspace)
-    @ccall libompabi.omp_abi_omp_get_devices_memspace(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_devices_memspace(ndevs::Cint, devs::Ptr{Cint}, memspace::omp_memspace_handle_t)::omp_memspace_handle_t
 end
 
 function omp_get_dyn_gprivate_memspace(access_group)
-    @ccall libompabi.omp_abi_omp_get_dyn_gprivate_memspace(access_group::omp_access_t)::omp_memspace_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_dyn_gprivate_memspace(access_group::omp_access_t)::omp_memspace_handle_t
 end
 
 function omp_get_dyn_gprivate_nofb_ptr(offset, access_group)
-    @ccall libompabi.omp_abi_omp_get_dyn_gprivate_nofb_ptr(offset::Csize_t, access_group::omp_access_t)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_dyn_gprivate_nofb_ptr(offset::Csize_t, access_group::omp_access_t)::Ptr{Cvoid}
 end
 
 function omp_get_dyn_gprivate_ptr(offset, access_group)
-    @ccall libompabi.omp_abi_omp_get_dyn_gprivate_ptr(offset::Csize_t, access_group::omp_access_t)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_dyn_gprivate_ptr(offset::Csize_t, access_group::omp_access_t)::Ptr{Cvoid}
 end
 
 function omp_get_dyn_gprivate_size(access_group)
-    @ccall libompabi.omp_abi_omp_get_dyn_gprivate_size(access_group::omp_access_t)::Csize_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_dyn_gprivate_size(access_group::omp_access_t)::Csize_t
 end
 
 function omp_get_dynamic()
-    @ccall libompabi.omp_abi_omp_get_dynamic()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_dynamic()::Cint
 end
 
 function omp_get_filtered_devices(filter, ndevs, devs)
-    @ccall libompabi.omp_abi_omp_get_filtered_devices(filter::Cstring, ndevs::Cint, devs::Ptr{Cint})::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_filtered_devices(filter::Cstring, ndevs::Cint, devs::Ptr{Cint})::Cint
 end
 
 function omp_get_gprivate_limit(device_num, access_group)
-    @ccall libompabi.omp_abi_omp_get_gprivate_limit(device_num::Cint, access_group::omp_access_t)::Csize_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_gprivate_limit(device_num::Cint, access_group::omp_access_t)::Csize_t
 end
 
 function omp_get_initial_device()
-    @ccall libompabi.omp_abi_omp_get_initial_device()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_initial_device()::Cint
 end
 
 function omp_get_interop_int(interop, property_id, ret_code)
-    @ccall libompabi.omp_abi_omp_get_interop_int(interop::omp_interop_t, property_id::omp_interop_property_t, ret_code::Ptr{omp_interop_rc_t})::omp_intptr_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_interop_int(interop::omp_interop_t, property_id::omp_interop_property_t, ret_code::Ptr{omp_interop_rc_t})::omp_intptr_t
 end
 
 function omp_get_interop_name(interop, property_id)
-    @ccall libompabi.omp_abi_omp_get_interop_name(interop::omp_interop_t, property_id::omp_interop_property_t)::Cstring
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_interop_name(interop::omp_interop_t, property_id::omp_interop_property_t)::Cstring
 end
 
 function omp_get_interop_ptr(interop, property_id, ret_code)
-    @ccall libompabi.omp_abi_omp_get_interop_ptr(interop::omp_interop_t, property_id::omp_interop_property_t, ret_code::Ptr{omp_interop_rc_t})::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_interop_ptr(interop::omp_interop_t, property_id::omp_interop_property_t, ret_code::Ptr{omp_interop_rc_t})::Ptr{Cvoid}
 end
 
 function omp_get_interop_rc_desc(interop, ret_code)
-    @ccall libompabi.omp_abi_omp_get_interop_rc_desc(interop::omp_interop_t, ret_code::omp_interop_rc_t)::Cstring
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_interop_rc_desc(interop::omp_interop_t, ret_code::omp_interop_rc_t)::Cstring
 end
 
 function omp_get_interop_str(interop, property_id, ret_code)
-    @ccall libompabi.omp_abi_omp_get_interop_str(interop::omp_interop_t, property_id::omp_interop_property_t, ret_code::Ptr{omp_interop_rc_t})::Cstring
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_interop_str(interop::omp_interop_t, property_id::omp_interop_property_t, ret_code::Ptr{omp_interop_rc_t})::Cstring
 end
 
 function omp_get_interop_type_desc(interop, property_id)
-    @ccall libompabi.omp_abi_omp_get_interop_type_desc(interop::omp_interop_t, property_id::omp_interop_property_t)::Cstring
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_interop_type_desc(interop::omp_interop_t, property_id::omp_interop_property_t)::Cstring
 end
 
 function omp_get_level()
-    @ccall libompabi.omp_abi_omp_get_level()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_level()::Cint
 end
 
 function omp_get_mapped_ptr(ptr, device_num)
-    @ccall libompabi.omp_abi_omp_get_mapped_ptr(ptr::Ptr{Cvoid}, device_num::Cint)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_mapped_ptr(ptr::Ptr{Cvoid}, device_num::Cint)::Ptr{Cvoid}
 end
 
 function omp_get_max_active_levels()
-    @ccall libompabi.omp_abi_omp_get_max_active_levels()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_max_active_levels()::Cint
 end
 
 function omp_get_max_progress_width(device_num)
-    @ccall libompabi.omp_abi_omp_get_max_progress_width(device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_max_progress_width(device_num::Cint)::Cint
 end
 
 function omp_get_max_task_priority()
-    @ccall libompabi.omp_abi_omp_get_max_task_priority()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_max_task_priority()::Cint
 end
 
 function omp_get_max_teams()
-    @ccall libompabi.omp_abi_omp_get_max_teams()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_max_teams()::Cint
 end
 
 function omp_get_max_threads()
-    @ccall libompabi.omp_abi_omp_get_max_threads()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_max_threads()::Cint
 end
 
 function omp_get_memspace_num_resources(memspace)
-    @ccall libompabi.omp_abi_omp_get_memspace_num_resources(memspace::omp_memspace_handle_t)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_memspace_num_resources(memspace::omp_memspace_handle_t)::Cint
 end
 
 function omp_get_memspace_pagesize(memspace)
-    @ccall libompabi.omp_abi_omp_get_memspace_pagesize(memspace::omp_memspace_handle_t)::Csize_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_memspace_pagesize(memspace::omp_memspace_handle_t)::Csize_t
 end
 
 function omp_get_num_devices()
-    @ccall libompabi.omp_abi_omp_get_num_devices()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_num_devices()::Cint
 end
 
 function omp_get_num_interop_properties(interop)
-    @ccall libompabi.omp_abi_omp_get_num_interop_properties(interop::omp_interop_t)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_num_interop_properties(interop::omp_interop_t)::Cint
 end
 
 function omp_get_num_places()
-    @ccall libompabi.omp_abi_omp_get_num_places()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_num_places()::Cint
 end
 
 function omp_get_num_procs()
-    @ccall libompabi.omp_abi_omp_get_num_procs()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_num_procs()::Cint
 end
 
 function omp_get_num_teams()
-    @ccall libompabi.omp_abi_omp_get_num_teams()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_num_teams()::Cint
 end
 
 function omp_get_num_teams_dim(dim)
-    @ccall libompabi.omp_abi_omp_get_num_teams_dim(dim::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_num_teams_dim(dim::Cint)::Cint
 end
 
 function omp_get_num_threads()
-    @ccall libompabi.omp_abi_omp_get_num_threads()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_num_threads()::Cint
 end
 
 function omp_get_num_threads_dim(dim)
-    @ccall libompabi.omp_abi_omp_get_num_threads_dim(dim::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_num_threads_dim(dim::Cint)::Cint
 end
 
 function omp_get_partition_num_places()
-    @ccall libompabi.omp_abi_omp_get_partition_num_places()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_partition_num_places()::Cint
 end
 
 function omp_get_partition_place_nums(place_nums)
-    @ccall libompabi.omp_abi_omp_get_partition_place_nums(place_nums::Ptr{Cint})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_partition_place_nums(place_nums::Ptr{Cint})::Cvoid
 end
 
 function omp_get_place_num()
-    @ccall libompabi.omp_abi_omp_get_place_num()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_place_num()::Cint
 end
 
 function omp_get_place_num_procs(place_num)
-    @ccall libompabi.omp_abi_omp_get_place_num_procs(place_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_place_num_procs(place_num::Cint)::Cint
 end
 
 function omp_get_place_proc_ids(place_num, ids)
-    @ccall libompabi.omp_abi_omp_get_place_proc_ids(place_num::Cint, ids::Ptr{Cint})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_place_proc_ids(place_num::Cint, ids::Ptr{Cint})::Cvoid
 end
 
 function omp_get_proc_bind()
-    @ccall libompabi.omp_abi_omp_get_proc_bind()::omp_proc_bind_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_proc_bind()::omp_proc_bind_t
 end
 
 function omp_get_schedule(kind, chunk_size)
-    @ccall libompabi.omp_abi_omp_get_schedule(kind::Ptr{omp_sched_t}, chunk_size::Ptr{Cint})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_schedule(kind::Ptr{omp_sched_t}, chunk_size::Ptr{Cint})::Cvoid
 end
 
 function omp_get_submemspace(memspace, num_resources, resources)
-    @ccall libompabi.omp_abi_omp_get_submemspace(memspace::omp_memspace_handle_t, num_resources::Cint, resources::Ptr{Cint})::omp_memspace_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_submemspace(memspace::omp_memspace_handle_t, num_resources::Cint, resources::Ptr{Cint})::omp_memspace_handle_t
 end
 
 function omp_get_supported_active_league_dims(device_num, native_support)
-    @ccall libompabi.omp_abi_omp_get_supported_active_league_dims(device_num::Cint, native_support::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_supported_active_league_dims(device_num::Cint, native_support::Cint)::Cint
 end
 
 function omp_get_supported_active_levels()
-    @ccall libompabi.omp_abi_omp_get_supported_active_levels()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_supported_active_levels()::Cint
 end
 
 function omp_get_supported_active_team_dims(device_num, native_support)
-    @ccall libompabi.omp_abi_omp_get_supported_active_team_dims(device_num::Cint, native_support::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_supported_active_team_dims(device_num::Cint, native_support::Cint)::Cint
 end
 
 function omp_get_supported_teams_dim(device_num, dim)
-    @ccall libompabi.omp_abi_omp_get_supported_teams_dim(device_num::Cint, dim::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_supported_teams_dim(device_num::Cint, dim::Cint)::Cint
 end
 
 function omp_get_supported_threads_dim(device_num, dim)
-    @ccall libompabi.omp_abi_omp_get_supported_threads_dim(device_num::Cint, dim::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_supported_threads_dim(device_num::Cint, dim::Cint)::Cint
 end
 
 function omp_get_team_num()
-    @ccall libompabi.omp_abi_omp_get_team_num()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_team_num()::Cint
 end
 
 function omp_get_team_num_dim(dim)
-    @ccall libompabi.omp_abi_omp_get_team_num_dim(dim::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_team_num_dim(dim::Cint)::Cint
 end
 
 function omp_get_team_size(level)
-    @ccall libompabi.omp_abi_omp_get_team_size(level::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_team_size(level::Cint)::Cint
 end
 
 function omp_get_teams_thread_limit()
-    @ccall libompabi.omp_abi_omp_get_teams_thread_limit()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_teams_thread_limit()::Cint
 end
 
 function omp_get_thread_limit()
-    @ccall libompabi.omp_abi_omp_get_thread_limit()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_thread_limit()::Cint
 end
 
 function omp_get_thread_limit_dim(dim)
-    @ccall libompabi.omp_abi_omp_get_thread_limit_dim(dim::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_thread_limit_dim(dim::Cint)::Cint
 end
 
 function omp_get_thread_num()
-    @ccall libompabi.omp_abi_omp_get_thread_num()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_thread_num()::Cint
 end
 
 function omp_get_thread_num_dim(dim)
-    @ccall libompabi.omp_abi_omp_get_thread_num_dim(dim::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_thread_num_dim(dim::Cint)::Cint
 end
 
 function omp_get_uid_from_device(device_num)
-    @ccall libompabi.omp_abi_omp_get_uid_from_device(device_num::Cint)::Cstring
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_uid_from_device(device_num::Cint)::Cstring
 end
 
 function omp_get_wtick()
-    @ccall libompabi.omp_abi_omp_get_wtick()::Cdouble
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_wtick()::Cdouble
 end
 
 function omp_get_wtime()
-    @ccall libompabi.omp_abi_omp_get_wtime()::Cdouble
+    @ccall gc_safe = true libompabi.omp_abi_omp_get_wtime()::Cdouble
 end
 
 function omp_in_explicit_task()
-    @ccall libompabi.omp_abi_omp_in_explicit_task()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_in_explicit_task()::Cint
 end
 
 function omp_in_final()
-    @ccall libompabi.omp_abi_omp_in_final()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_in_final()::Cint
 end
 
 function omp_in_parallel()
-    @ccall libompabi.omp_abi_omp_in_parallel()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_in_parallel()::Cint
 end
 
 function omp_init_allocator(memspace, ntraits, traits)
-    @ccall libompabi.omp_abi_omp_init_allocator(memspace::omp_memspace_handle_t, ntraits::Cint, traits::Ptr{omp_alloctrait_t})::omp_allocator_handle_t
+    @ccall gc_safe = true libompabi.omp_abi_omp_init_allocator(memspace::omp_memspace_handle_t, ntraits::Cint, traits::Ptr{omp_alloctrait_t})::omp_allocator_handle_t
 end
 
 function omp_init_lock(svar)
-    @ccall libompabi.omp_abi_omp_init_lock(svar::Ptr{omp_lock_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_init_lock(svar::Ptr{omp_lock_t})::Cvoid
 end
 
 function omp_init_lock_with_hint(svar, hint)
-    @ccall libompabi.omp_abi_omp_init_lock_with_hint(svar::Ptr{omp_lock_t}, hint::omp_sync_hint_t)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_init_lock_with_hint(svar::Ptr{omp_lock_t}, hint::omp_sync_hint_t)::Cvoid
 end
 
 function omp_init_mempartition(partition, nparts, user_data)
-    @ccall libompabi.omp_abi_omp_init_mempartition(partition::Ptr{omp_mempartition_t}, nparts::Csize_t, user_data::Ptr{Cvoid})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_init_mempartition(partition::Ptr{omp_mempartition_t}, nparts::Csize_t, user_data::Ptr{Cvoid})::Cvoid
 end
 
 function omp_init_mempartitioner(partitioner, lifetime, compute_proc, release_proc)
-    @ccall libompabi.omp_abi_omp_init_mempartitioner(partitioner::Ptr{omp_mempartitioner_t}, lifetime::omp_mempartitioner_lifetime_t, compute_proc::omp_mempartitioner_compute_proc_t, release_proc::omp_mempartitioner_release_proc_t)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_init_mempartitioner(partitioner::Ptr{omp_mempartitioner_t}, lifetime::omp_mempartitioner_lifetime_t, compute_proc::omp_mempartitioner_compute_proc_t, release_proc::omp_mempartitioner_release_proc_t)::Cvoid
 end
 
 function omp_init_nest_lock(nvar)
-    @ccall libompabi.omp_abi_omp_init_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_init_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
 end
 
 function omp_init_nest_lock_with_hint(nvar, hint)
-    @ccall libompabi.omp_abi_omp_init_nest_lock_with_hint(nvar::Ptr{omp_nest_lock_t}, hint::omp_sync_hint_t)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_init_nest_lock_with_hint(nvar::Ptr{omp_nest_lock_t}, hint::omp_sync_hint_t)::Cvoid
 end
 
 function omp_is_free_agent()
-    @ccall libompabi.omp_abi_omp_is_free_agent()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_is_free_agent()::Cint
 end
 
 function omp_is_initial_device()
-    @ccall libompabi.omp_abi_omp_is_initial_device()::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_is_initial_device()::Cint
 end
 
 function omp_mempartition_get_user_data(partition)
-    @ccall libompabi.omp_abi_omp_mempartition_get_user_data(partition::Ptr{omp_mempartition_t})::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_mempartition_get_user_data(partition::Ptr{omp_mempartition_t})::Ptr{Cvoid}
 end
 
 function omp_mempartition_set_part(partition, part, resource, size)
-    @ccall libompabi.omp_abi_omp_mempartition_set_part(partition::Ptr{omp_mempartition_t}, part::Csize_t, resource::Cint, size::Csize_t)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_mempartition_set_part(partition::Ptr{omp_mempartition_t}, part::Csize_t, resource::Cint, size::Csize_t)::Cint
 end
 
 function omp_pause_resource(kind, device_num)
-    @ccall libompabi.omp_abi_omp_pause_resource(kind::omp_pause_resource_t, device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_pause_resource(kind::omp_pause_resource_t, device_num::Cint)::Cint
 end
 
 function omp_pause_resource_all(kind)
-    @ccall libompabi.omp_abi_omp_pause_resource_all(kind::omp_pause_resource_t)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_pause_resource_all(kind::omp_pause_resource_t)::Cint
 end
 
 function omp_realloc(ptr, size, allocator, free_allocator)
-    @ccall libompabi.omp_abi_omp_realloc(ptr::Ptr{Cvoid}, size::Csize_t, allocator::omp_allocator_handle_t, free_allocator::omp_allocator_handle_t)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_realloc(ptr::Ptr{Cvoid}, size::Csize_t, allocator::omp_allocator_handle_t, free_allocator::omp_allocator_handle_t)::Ptr{Cvoid}
 end
 
 function omp_set_affinity_format(format)
-    @ccall libompabi.omp_abi_omp_set_affinity_format(format::Cstring)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_affinity_format(format::Cstring)::Cvoid
 end
 
 function omp_set_default_allocator(allocator)
-    @ccall libompabi.omp_abi_omp_set_default_allocator(allocator::omp_allocator_handle_t)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_default_allocator(allocator::omp_allocator_handle_t)::Cvoid
 end
 
 function omp_set_default_device(device_num)
-    @ccall libompabi.omp_abi_omp_set_default_device(device_num::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_default_device(device_num::Cint)::Cvoid
 end
 
 function omp_set_device_num_teams(num_teams, device_num)
-    @ccall libompabi.omp_abi_omp_set_device_num_teams(num_teams::Cint, device_num::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_device_num_teams(num_teams::Cint, device_num::Cint)::Cvoid
 end
 
 function omp_set_device_teams_thread_limit(thread_limit, device_num)
-    @ccall libompabi.omp_abi_omp_set_device_teams_thread_limit(thread_limit::Cint, device_num::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_device_teams_thread_limit(thread_limit::Cint, device_num::Cint)::Cvoid
 end
 
 function omp_set_dynamic(dynamic_threads)
-    @ccall libompabi.omp_abi_omp_set_dynamic(dynamic_threads::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_dynamic(dynamic_threads::Cint)::Cvoid
 end
 
 function omp_set_lock(svar)
-    @ccall libompabi.omp_abi_omp_set_lock(svar::Ptr{omp_lock_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_lock(svar::Ptr{omp_lock_t})::Cvoid
 end
 
 function omp_set_max_active_levels(max_levels)
-    @ccall libompabi.omp_abi_omp_set_max_active_levels(max_levels::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_max_active_levels(max_levels::Cint)::Cvoid
 end
 
 function omp_set_nest_lock(nvar)
-    @ccall libompabi.omp_abi_omp_set_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
 end
 
 function omp_set_num_teams(num_teams)
-    @ccall libompabi.omp_abi_omp_set_num_teams(num_teams::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_num_teams(num_teams::Cint)::Cvoid
 end
 
 function omp_set_num_threads(num_threads)
-    @ccall libompabi.omp_abi_omp_set_num_threads(num_threads::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_num_threads(num_threads::Cint)::Cvoid
 end
 
 function omp_set_schedule(kind, chunk_size)
-    @ccall libompabi.omp_abi_omp_set_schedule(kind::omp_sched_t, chunk_size::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_schedule(kind::omp_sched_t, chunk_size::Cint)::Cvoid
 end
 
 function omp_set_teams_thread_limit(thread_limit)
-    @ccall libompabi.omp_abi_omp_set_teams_thread_limit(thread_limit::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_set_teams_thread_limit(thread_limit::Cint)::Cvoid
 end
 
 function omp_target_alloc(size, device_num)
-    @ccall libompabi.omp_abi_omp_target_alloc(size::Csize_t, device_num::Cint)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_alloc(size::Csize_t, device_num::Cint)::Ptr{Cvoid}
 end
 
 function omp_target_associate_ptr(host_ptr, device_ptr, size, device_offset, device_num)
-    @ccall libompabi.omp_abi_omp_target_associate_ptr(host_ptr::Ptr{Cvoid}, device_ptr::Ptr{Cvoid}, size::Csize_t, device_offset::Csize_t, device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_associate_ptr(host_ptr::Ptr{Cvoid}, device_ptr::Ptr{Cvoid}, size::Csize_t, device_offset::Csize_t, device_num::Cint)::Cint
 end
 
 function omp_target_disassociate_ptr(ptr, device_num)
-    @ccall libompabi.omp_abi_omp_target_disassociate_ptr(ptr::Ptr{Cvoid}, device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_disassociate_ptr(ptr::Ptr{Cvoid}, device_num::Cint)::Cint
 end
 
 function omp_target_free(device_ptr, device_num)
-    @ccall libompabi.omp_abi_omp_target_free(device_ptr::Ptr{Cvoid}, device_num::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_free(device_ptr::Ptr{Cvoid}, device_num::Cint)::Cvoid
 end
 
 function omp_target_is_accessible(ptr, size, device_num)
-    @ccall libompabi.omp_abi_omp_target_is_accessible(ptr::Ptr{Cvoid}, size::Csize_t, device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_is_accessible(ptr::Ptr{Cvoid}, size::Csize_t, device_num::Cint)::Cint
 end
 
 function omp_target_is_present(ptr, device_num)
-    @ccall libompabi.omp_abi_omp_target_is_present(ptr::Ptr{Cvoid}, device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_is_present(ptr::Ptr{Cvoid}, device_num::Cint)::Cint
 end
 
 function omp_target_memcpy(dst, src, length, dst_offset, src_offset, dst_device_num, src_device_num)
-    @ccall libompabi.omp_abi_omp_target_memcpy(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, length::Csize_t, dst_offset::Csize_t, src_offset::Csize_t, dst_device_num::Cint, src_device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_memcpy(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, length::Csize_t, dst_offset::Csize_t, src_offset::Csize_t, dst_device_num::Cint, src_device_num::Cint)::Cint
 end
 
 function omp_target_memcpy_async(dst, src, length, dst_offset, src_offset, dst_device_num, src_device_num, depobj_count, depobj_list)
-    @ccall libompabi.omp_abi_omp_target_memcpy_async(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, length::Csize_t, dst_offset::Csize_t, src_offset::Csize_t, dst_device_num::Cint, src_device_num::Cint, depobj_count::Cint, depobj_list::Ptr{omp_depend_t})::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_memcpy_async(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, length::Csize_t, dst_offset::Csize_t, src_offset::Csize_t, dst_device_num::Cint, src_device_num::Cint, depobj_count::Cint, depobj_list::Ptr{omp_depend_t})::Cint
 end
 
 function omp_target_memcpy_rect(dst, src, element_size, num_dims, volume, dst_offsets, src_offsets, dst_dimensions, src_dimensions, dst_device_num, src_device_num)
-    @ccall libompabi.omp_abi_omp_target_memcpy_rect(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, element_size::Csize_t, num_dims::Cint, volume::Ptr{Csize_t}, dst_offsets::Ptr{Csize_t}, src_offsets::Ptr{Csize_t}, dst_dimensions::Ptr{Csize_t}, src_dimensions::Ptr{Csize_t}, dst_device_num::Cint, src_device_num::Cint)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_memcpy_rect(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, element_size::Csize_t, num_dims::Cint, volume::Ptr{Csize_t}, dst_offsets::Ptr{Csize_t}, src_offsets::Ptr{Csize_t}, dst_dimensions::Ptr{Csize_t}, src_dimensions::Ptr{Csize_t}, dst_device_num::Cint, src_device_num::Cint)::Cint
 end
 
 function omp_target_memcpy_rect_async(dst, src, element_size, num_dims, volume, dst_offsets, src_offsets, dst_dimensions, src_dimensions, dst_device_num, src_device_num, depobj_count, depobj_list)
-    @ccall libompabi.omp_abi_omp_target_memcpy_rect_async(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, element_size::Csize_t, num_dims::Cint, volume::Ptr{Csize_t}, dst_offsets::Ptr{Csize_t}, src_offsets::Ptr{Csize_t}, dst_dimensions::Ptr{Csize_t}, src_dimensions::Ptr{Csize_t}, dst_device_num::Cint, src_device_num::Cint, depobj_count::Cint, depobj_list::Ptr{omp_depend_t})::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_memcpy_rect_async(dst::Ptr{Cvoid}, src::Ptr{Cvoid}, element_size::Csize_t, num_dims::Cint, volume::Ptr{Csize_t}, dst_offsets::Ptr{Csize_t}, src_offsets::Ptr{Csize_t}, dst_dimensions::Ptr{Csize_t}, src_dimensions::Ptr{Csize_t}, dst_device_num::Cint, src_device_num::Cint, depobj_count::Cint, depobj_list::Ptr{omp_depend_t})::Cint
 end
 
 function omp_target_memset(ptr, val, count, device_num)
-    @ccall libompabi.omp_abi_omp_target_memset(ptr::Ptr{Cvoid}, val::Cint, count::Csize_t, device_num::Cint)::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_memset(ptr::Ptr{Cvoid}, val::Cint, count::Csize_t, device_num::Cint)::Ptr{Cvoid}
 end
 
 function omp_target_memset_async(ptr, val, count, device_num, depobj_count, depobj_list)
-    @ccall libompabi.omp_abi_omp_target_memset_async(ptr::Ptr{Cvoid}, val::Cint, count::Csize_t, device_num::Cint, depobj_count::Cint, depobj_list::Ptr{omp_depend_t})::Ptr{Cvoid}
+    @ccall gc_safe = true libompabi.omp_abi_omp_target_memset_async(ptr::Ptr{Cvoid}, val::Cint, count::Csize_t, device_num::Cint, depobj_count::Cint, depobj_list::Ptr{omp_depend_t})::Ptr{Cvoid}
 end
 
 function omp_test_lock(svar)
-    @ccall libompabi.omp_abi_omp_test_lock(svar::Ptr{omp_lock_t})::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_test_lock(svar::Ptr{omp_lock_t})::Cint
 end
 
 function omp_test_nest_lock(nvar)
-    @ccall libompabi.omp_abi_omp_test_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cint
+    @ccall gc_safe = true libompabi.omp_abi_omp_test_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cint
 end
 
 function omp_unset_lock(svar)
-    @ccall libompabi.omp_abi_omp_unset_lock(svar::Ptr{omp_lock_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_unset_lock(svar::Ptr{omp_lock_t})::Cvoid
 end
 
 function omp_unset_nest_lock(nvar)
-    @ccall libompabi.omp_abi_omp_unset_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_omp_unset_nest_lock(nvar::Ptr{omp_nest_lock_t})::Cvoid
 end
 
 const omp_abi_task_handle_t = Ptr{Cvoid}
@@ -859,15 +859,15 @@ end
 const omp_abi_depend_info_t = omp_abi_depend_info
 
 function omp_abi_gomp_depend_count(gomp_depend)
-    @ccall libompabi.omp_abi_gomp_depend_count(gomp_depend::Ptr{Ptr{Cvoid}})::Csize_t
+    @ccall gc_safe = true libompabi.omp_abi_gomp_depend_count(gomp_depend::Ptr{Ptr{Cvoid}})::Csize_t
 end
 
 function omp_abi_deps_kmp_to_gomp(kmp_deps, ndeps, out_gomp)
-    @ccall libompabi.omp_abi_deps_kmp_to_gomp(kmp_deps::Ptr{omp_abi_depend_info_t}, ndeps::Csize_t, out_gomp::Ptr{Ptr{Cvoid}})::Csize_t
+    @ccall gc_safe = true libompabi.omp_abi_deps_kmp_to_gomp(kmp_deps::Ptr{omp_abi_depend_info_t}, ndeps::Csize_t, out_gomp::Ptr{Ptr{Cvoid}})::Csize_t
 end
 
 function omp_abi_deps_gomp_to_kmp(gomp_depend, out_kmp)
-    @ccall libompabi.omp_abi_deps_gomp_to_kmp(gomp_depend::Ptr{Ptr{Cvoid}}, out_kmp::Ptr{omp_abi_depend_info_t})::Csize_t
+    @ccall gc_safe = true libompabi.omp_abi_deps_gomp_to_kmp(gomp_depend::Ptr{Ptr{Cvoid}}, out_kmp::Ptr{omp_abi_depend_info_t})::Csize_t
 end
 
 @cenum omp_abi_map_type_e::UInt32 begin
@@ -906,75 +906,75 @@ end
 const omp_abi_kernel_args_t = omp_abi_kernel_args
 
 function omp_abi_target(device_id, host_ptr, num_teams, thread_limit, args)
-    @ccall libompabi.omp_abi_target(device_id::Int64, host_ptr::Ptr{Cvoid}, num_teams::Int32, thread_limit::Int32, args::Ptr{omp_abi_kernel_args_t})::Cint
+    @ccall gc_safe = true libompabi.omp_abi_target(device_id::Int64, host_ptr::Ptr{Cvoid}, num_teams::Int32, thread_limit::Int32, args::Ptr{omp_abi_kernel_args_t})::Cint
 end
 
 function omp_abi_target_data_begin(device_id, num_args, base_ptrs, ptrs, sizes, map_types)
-    @ccall libompabi.omp_abi_target_data_begin(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_target_data_begin(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
 end
 
 function omp_abi_target_data_end(device_id, num_args, base_ptrs, ptrs, sizes, map_types)
-    @ccall libompabi.omp_abi_target_data_end(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_target_data_end(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
 end
 
 function omp_abi_target_data_update(device_id, num_args, base_ptrs, ptrs, sizes, map_types)
-    @ccall libompabi.omp_abi_target_data_update(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_target_data_update(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
 end
 
 function omp_abi_target_enter_data(device_id, num_args, base_ptrs, ptrs, sizes, map_types)
-    @ccall libompabi.omp_abi_target_enter_data(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_target_enter_data(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
 end
 
 function omp_abi_target_exit_data(device_id, num_args, base_ptrs, ptrs, sizes, map_types)
-    @ccall libompabi.omp_abi_target_exit_data(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_target_exit_data(device_id::Int64, num_args::Int32, base_ptrs::Ptr{Ptr{Cvoid}}, ptrs::Ptr{Ptr{Cvoid}}, sizes::Ptr{Int64}, map_types::Ptr{Int64})::Cvoid
 end
 
 function omp_abi_backend_name()
-    @ccall libompabi.omp_abi_backend_name()::Cstring
+    @ccall gc_safe = true libompabi.omp_abi_backend_name()::Cstring
 end
 
 function omp_abi_dialect_name()
-    @ccall libompabi.omp_abi_dialect_name()::Cstring
+    @ccall gc_safe = true libompabi.omp_abi_dialect_name()::Cstring
 end
 
 function omp_abi_has_routine(name)
-    @ccall libompabi.omp_abi_has_routine(name::Cstring)::Cint
+    @ccall gc_safe = true libompabi.omp_abi_has_routine(name::Cstring)::Cint
 end
 
 function omp_abi_parallel(fn, data, num_threads, flags)
-    @ccall libompabi.omp_abi_parallel(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, num_threads::Cuint, flags::Cuint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_parallel(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, num_threads::Cuint, flags::Cuint)::Cvoid
 end
 
 function omp_abi_task(fn, data, cpyfn, arg_size, arg_align, if_clause, flags)
-    @ccall libompabi.omp_abi_task(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, cpyfn::Ptr{Cvoid}, arg_size::Clong, arg_align::Clong, if_clause::Cint, flags::Cuint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_task(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, cpyfn::Ptr{Cvoid}, arg_size::Clong, arg_align::Clong, if_clause::Cint, flags::Cuint)::Cvoid
 end
 
 function omp_abi_task_with_deps_gomp(fn, data, cpyfn, arg_size, arg_align, if_clause, flags, depend)
-    @ccall libompabi.omp_abi_task_with_deps_gomp(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, cpyfn::Ptr{Cvoid}, arg_size::Clong, arg_align::Clong, if_clause::Cint, flags::Cuint, depend::Ptr{Ptr{Cvoid}})::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_task_with_deps_gomp(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, cpyfn::Ptr{Cvoid}, arg_size::Clong, arg_align::Clong, if_clause::Cint, flags::Cuint, depend::Ptr{Ptr{Cvoid}})::Cvoid
 end
 
 function omp_abi_task_with_deps_kmp(fn, data, cpyfn, arg_size, arg_align, if_clause, flags, deps, ndeps)
-    @ccall libompabi.omp_abi_task_with_deps_kmp(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, cpyfn::Ptr{Cvoid}, arg_size::Clong, arg_align::Clong, if_clause::Cint, flags::Cuint, deps::Ptr{omp_abi_depend_info_t}, ndeps::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_task_with_deps_kmp(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, cpyfn::Ptr{Cvoid}, arg_size::Clong, arg_align::Clong, if_clause::Cint, flags::Cuint, deps::Ptr{omp_abi_depend_info_t}, ndeps::Cint)::Cvoid
 end
 
 function omp_abi_task_with_deps(fn, data, cpyfn, arg_size, arg_align, if_clause, flags, deps, ndeps)
-    @ccall libompabi.omp_abi_task_with_deps(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, cpyfn::Ptr{Cvoid}, arg_size::Clong, arg_align::Clong, if_clause::Cint, flags::Cuint, deps::Ptr{omp_abi_depend_info_t}, ndeps::Cint)::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_task_with_deps(fn::Ptr{Cvoid}, data::Ptr{Cvoid}, cpyfn::Ptr{Cvoid}, arg_size::Clong, arg_align::Clong, if_clause::Cint, flags::Cuint, deps::Ptr{omp_abi_depend_info_t}, ndeps::Cint)::Cvoid
 end
 
 function omp_abi_taskwait()
-    @ccall libompabi.omp_abi_taskwait()::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_taskwait()::Cvoid
 end
 
 function omp_abi_taskgroup_begin()
-    @ccall libompabi.omp_abi_taskgroup_begin()::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_taskgroup_begin()::Cvoid
 end
 
 function omp_abi_taskgroup_end()
-    @ccall libompabi.omp_abi_taskgroup_end()::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_taskgroup_end()::Cvoid
 end
 
 function omp_abi_taskyield()
-    @ccall libompabi.omp_abi_taskyield()::Cvoid
+    @ccall gc_safe = true libompabi.omp_abi_taskyield()::Cvoid
 end
 
 const OMP_ABI_OPENMP_VERSION = "6.1"

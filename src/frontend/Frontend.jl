@@ -17,6 +17,7 @@ Organization (hand-written unless noted):
 | `ir.jl`               | the intermediate representation                                     |
 | `parse/`              | parsers, top-down: directive > clause > modifier > argument; `text.jl` splits directive strings |
 | `validate.jl`         | syntactic restrictions (unique, required, exclusive, ultimate, ...) |
+| `compound.jl`         | splitting compound directives into leafs                            |
 | `lower.jl`            | code generation entry point                                         |
 | `macros.jl`           | `@pragma`, `@omp`, `@pragma_ir`                                     |
 """
@@ -41,6 +42,7 @@ include("parse/clause.jl")
 include("parse/directive.jl")
 
 include("validate.jl")
+include("compound.jl")
 include("lower.jl")
 include("macros.jl")
 

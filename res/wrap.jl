@@ -35,7 +35,7 @@ function main()
     ctx = create_context(headers, args, options)
     build!(ctx, BUILDSTAGE_NO_PRINTING)
     for node in ctx.dag.nodes
-        map!(api_names, node.exprs, node.exprs)
+        map!(gc_safe ∘ api_names, node.exprs, node.exprs)
     end
     build!(ctx, BUILDSTAGE_PRINTING_ONLY)
     return
@@ -46,5 +46,12 @@ const API_PREFIX = "omp_abi_omp_"
 api_names(s::Symbol) = startswith(string(s), API_PREFIX) ? Symbol(chopprefix(string(s), "omp_abi_")) : s
 api_names(e::Expr) = Expr(e.head, map(api_names, e.args)...)
 api_names(x) = x
+
+# omp-abi never touches Julia objects: every call is GC-safe, so that one blocking in the
+# runtime (a lock, a barrier) does not stall the GC of other threads
+gc_safe(e::Expr) = Meta.isexpr(e, :macrocall) && e.args[1] === Symbol("@ccall") ?
+    Expr(:macrocall, e.args[1], e.args[2], :(gc_safe = true), e.args[3:end]...) :
+    Expr(e.head, map(gc_safe, e.args)...)
+gc_safe(x) = x
 
 isinteractive() || main()
