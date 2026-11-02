@@ -4,9 +4,9 @@
 using BinaryBuilder
 
 name = "OMPABI"
-version = v"0.1.0"
+version = v"0.2.0"
 
-commit = "778e177c6a789d2c777dfdbb89c9370a4e76ee4a"
+commit = "fbc52581e9eddd28f414d36c07b79dc416908932"
 # contrib/release.jl passes a clone of `commit` (omp-abi is private)
 sources = haskey(ENV, "OMP_ABI_SOURCE_DIR") ?
     [DirectorySource(ENV["OMP_ABI_SOURCE_DIR"]; target = "omp-abi")] :
