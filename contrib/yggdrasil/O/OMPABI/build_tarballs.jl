@@ -1,15 +1,16 @@
 # BinaryBuilder recipe of OMPABI_jll, laid out as in https://github.com/JuliaPackaging/Yggdrasil
-# so that it can be submitted there unchanged. See contrib/README.md.
+# so that it can be submitted there unchanged. Released by contrib/release.jl.
 
 using BinaryBuilder
 
 name = "OMPABI"
 version = v"0.1.0"
 
-sources = [
-    GitSource("https://github.com/Julia-OpenMP/omp-abi.git",
-              "778e177c6a789d2c777dfdbb89c9370a4e76ee4a"),
-]
+commit = "778e177c6a789d2c777dfdbb89c9370a4e76ee4a"
+# contrib/release.jl passes a clone of `commit` (omp-abi is private)
+sources = haskey(ENV, "OMP_ABI_SOURCE_DIR") ?
+    [DirectorySource(ENV["OMP_ABI_SOURCE_DIR"]; target = "omp-abi")] :
+    [GitSource("https://github.com/Julia-OpenMP/omp-abi.git", commit)]
 
 # USE_DYNAMIC: every backend is built in, and the OpenMP runtime is selected at
 # run time, so a single artifact serves libgomp, libomp, XKOMP and MPC.
@@ -40,4 +41,4 @@ dependencies = [
 ]
 
 build_tarballs(ARGS, name, version, sources, script, platforms, products, dependencies;
-               julia_compat="1.10", preferred_gcc_version=v"10")
+               julia_compat="1.13", preferred_gcc_version=v"10")

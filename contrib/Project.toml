@@ -1,3 +1,6 @@
 [deps]
 BinaryBuilder = "12aac903-9f7c-5d81-afc2-d9565ea332ae"
 LocalRegistry = "89398ba2-070a-4b16-a995-9893c55d93cf"
+
+[sources]
+BinaryBuilder = {rev = "d2b11c267ef8029af0f46a88b767246d7b9df1d1", url = "https://github.com/JuliaPackaging/BinaryBuilder.jl"}
