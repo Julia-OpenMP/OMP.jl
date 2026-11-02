@@ -1,11 +1,9 @@
-# The OpenMP API (omp.h), from omp-abi, called on the runtime selected by omp-abi
-
 using OMP
 
 @testset "names" begin
     @test length(OMP.API) > 200
     for name in OMP.API
-        @test name in names(OMP)              # exported: `using OMP` brings them in
+        @test name in names(OMP)
         @test getfield(OMP, name) === getfield(OMP.LibOMPABI, name)
     end
     @test :omp_get_num_threads in OMP.API && :omp_lock_t in OMP.API
@@ -18,11 +16,9 @@ using OMP
 end
 
 @testset "portable ABI" begin
-    # omp-abi's own definitions (omp-abi/api-impl.h), whatever the runtime
     @test sizeof(omp_lock_t) == sizeof(omp_nest_lock_t) == 4 * sizeof(Ptr{Cvoid})
     @test sizeof(omp_depend_t) == 2 * sizeof(Ptr{Cvoid})
     @test sizeof(omp_allocator_handle_t) == sizeof(omp_memspace_handle_t) == sizeof(Ptr{Cvoid})
-    # the values of the specification, which omp-abi converts to the runtime's
     @test Integer(omp_default_mem_space) == -1
     @test Integer(omp_atv_all) == 19
     @test Integer(omp_atv_device) == 7
@@ -102,7 +98,6 @@ end
     @test p != C_NULL
     omp_free(p, omp_default_mem_alloc)
 
-    # omp_default_mem_space and omp_atv_all have other values in the runtimes
     traits = [omp_alloctrait_t(omp_atk_alignment, 256),
               omp_alloctrait_t(omp_atk_access, omp_atv_all),
               omp_alloctrait_t(omp_atk_fallback, omp_atv_null_fb)]
@@ -121,7 +116,6 @@ end
 
 @testset "strings" begin
     buf = zeros(UInt8, 128)
-    # a `char *` is a Cstring (res/generator.toml): pass a pointer to a buffer, or a String
     get_format() = GC.@preserve buf unsafe_string(pointer(buf), omp_get_affinity_format(pointer(buf), length(buf)))
     old = get_format()
     omp_set_affinity_format("thread %n")

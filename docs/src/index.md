@@ -19,9 +19,6 @@ OpenMPSyntaxError
 
 ## API routines
 
-The OpenMP API of `omp.h` (`omp_get_num_threads()`, `omp_lock_t`, ...) is exported by `OMP`,
-from omp-abi (see the README).
-
 ```@docs
 OMP.has_routine
 ```

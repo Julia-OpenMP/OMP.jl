@@ -7,8 +7,7 @@ using CEnum: CEnum, @cenum
 
 using ..OMP: libompabi
 
-# Masks for omp_abi_kernel_args_t.flags, a C bitfield exposed as a plain UInt64
-# (Clang.jl cannot emit bitfields wider than 32 bits, see deps/generate.jl)
+# Masks of omp_abi_kernel_args_t.flags, a bitfield flattened by res/wrap.jl
 const OMP_ABI_KERNEL_ARGS_FLAG_NO_WAIT                   = UInt64(1) << 0
 const OMP_ABI_KERNEL_ARGS_FLAG_IS_CUDA                   = UInt64(1) << 1
 const OMP_ABI_KERNEL_ARGS_FLAG_DYN_CGROUP_MEM_FALLBACK   = UInt64(3) << 2
@@ -980,7 +979,7 @@ end
 
 const OMP_ABI_OPENMP_VERSION = "6.1"
 
-const OMP_ABI_OPENMP_SPEC_REVISION = "10689d455"
+const OMP_ABI_OPENMP_SPEC_REVISION = "d694c8d27"
 
 const omp_interop_none = 0
 

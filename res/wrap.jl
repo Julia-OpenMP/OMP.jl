@@ -1,14 +1,7 @@
-# Generate lib/LibOMPABI.jl, the bindings of the omp-abi C API.
+# Generate lib/LibOMPABI.jl from the omp-abi headers (default: those installed by
+# `deps/build_local.jl`, which should be a USE_DYNAMIC build, as shipped to users).
 #
 #   julia --project=res res/wrap.jl [omp-abi include dir]
-#
-# The include dir defaults to the omp-abi installed by `deps/build_local.jl`.
-# Bindings should be generated from a USE_DYNAMIC build, the configuration
-# shipped to users.
-#
-# omp-abi prefixes the OpenMP API (omp-abi/api.h) with `omp_abi_`: the bindings
-# keep the names of omp.h (`omp_abi_omp_get_num_threads` -> `omp_get_num_threads`,
-# `omp_abi_omp_lock_t` -> `omp_lock_t`), calling the prefixed C symbols.
 
 using Clang.Generators
 using Scratch
@@ -21,9 +14,8 @@ function main()
         error("omp-abi headers not found in $include_dir: run `deps/build_local.jl` first")
     @info "Using omp-abi headers in $include_dir"
 
-    # Clang.jl cannot emit bitfields wider than 32 bits: on a private copy of the
-    # headers, flatten the `flags` bitfield of omp_abi_kernel_args_t into a plain
-    # uint64_t (same layout; see the OMP_ABI_KERNEL_ARGS_FLAG_* masks in prologue.jl)
+    # Clang.jl cannot emit bitfields wider than 32 bits: on a copy of the headers,
+    # flatten the `flags` bitfield of omp_abi_kernel_args_t into a uint64_t
     bindgen_dir = mktempdir()
     cp(joinpath(include_dir, "omp-abi"), joinpath(bindgen_dir, "omp-abi"))
     target_h = joinpath(bindgen_dir, "omp-abi", "target.h")
@@ -38,9 +30,6 @@ function main()
 
     args = get_default_args()
     push!(args, "-I$bindgen_dir")
-    # Generate the OpenMP spec types from omp-abi's own definitions rather than from
-    # whichever vendor <omp.h> happens to be on the include path
-    push!(args, "-DOMP_ABI_NO_SYSTEM_OMP_H")
 
     headers = [joinpath(bindgen_dir, "omp-abi", "omp-abi.h")]
     ctx = create_context(headers, args, options)
@@ -52,9 +41,7 @@ function main()
     return
 end
 
-# The names of the OpenMP API: drop the `omp_abi_` prefix of `omp_abi_omp_*`
-# identifiers. The C symbol of a `@ccall` (`libompabi.omp_abi_omp_get_num_threads`)
-# is a QuoteNode, and keeps it.
+# omp_abi_omp_x -> omp_x; the C symbols of `@ccall`s are QuoteNodes, and keep the prefix
 const API_PREFIX = "omp_abi_omp_"
 api_names(s::Symbol) = startswith(string(s), API_PREFIX) ? Symbol(chopprefix(string(s), "omp_abi_")) : s
 api_names(e::Expr) = Expr(e.head, map(api_names, e.args)...)

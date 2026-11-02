@@ -52,7 +52,7 @@ output_ignorelist = [
     "^OMP_ABI(_CAT_?)?$",    # token-pasting macros used to build symbol names
     # build configuration of the omp-abi used for generation: query omp_abi_backend_name() instead
     "^OMP_ABI_(DYNAMIC|SUPPORT_\\w+|BACKEND|DIALECT\\w*)$",
-    # how omp-abi/api-impl.h configures omp-abi/api.h (values already in the enumerations)
+    # configuration of omp-abi/api.h
     "^OMP_ABI_(VALUE|EXTRA)_\\w+$",
     "^OMP_ABI_DEFAULT$",     # C++ default arguments
 ]
