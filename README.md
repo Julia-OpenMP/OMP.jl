@@ -12,18 +12,14 @@ OMP.jl and its binary dependency, `OMPABI_jll`, are distributed through the
 pkg> registry add General https://github.com/Julia-OpenMP/Registry
 pkg> add OMP
 ```
-While OMP.jl is private, `git` needs a GitHub token (e.g. in `~/.git-credentials`) and Pkg must use
-it: `export JULIA_PKG_USE_CLI_GIT=true`.
-No compiler or system OpenMP runtime is needed: omp-abi comes prebuilt as an
-artifact (Linux only for now), and the OpenMP runtime is the `libgomp` shipped with Julia.
+No compiler or system OpenMP runtime is needed: omp-abi comes prebuilt as an artifact (Linux only for now), and the OpenMP runtime is the `libgomp` shipped with Julia.
 
 ## Selecting the OpenMP runtime
-omp-abi is built with all its backends (`-DUSE_DYNAMIC=ON`), and forwards to the
-OpenMP runtime selected at run time: by default the `libgomp` shipped with Julia.
+omp-abi is built with all its backends (`-DUSE_DYNAMIC=ON`), and forwards to the OpenMP runtime selected at run time: by default the `libgomp` shipped with Julia.
 See [omp-abi](https://github.com/Julia-OpenMP/omp-abi) for how to select another runtime.
 
 # Directives
-OpenMP directives are written as in C/C++/Fortran, in a string, followed by their associated
+OpenMP directives are written as in C/C++/Fortran/Python, in a string, followed by their associated
 code (block, loop, function definition) if any:
 ```julia
 using OMP
@@ -32,15 +28,7 @@ using OMP
     ...
 end
 
-@pragma "omp parallel for reduction(+: s) schedule(dynamic, 4) if(n > 1000)" for i in eachindex(x)
-    s += x[i]^2
-end
-
 @pragma "omp task depend(in: a) depend(out: b) firstprivate(n)" begin
-    ...
-end
-
-@pragma "omp target teams distribute parallel for map(tofrom: x[1:n])" for i in 1:n
     ...
 end
 
@@ -48,25 +36,6 @@ end
 ```
 Expressions in clauses (`n > 1000`, `x[1:n]`) are Julia code referring to your variables;
 `@omp "..."` is short for `@pragma "omp ..."`.
-
-Directives that are valid Julia syntax may also be written without a string, e.g.
-`@pragma omp task depend(in: a) begin ... end`. This is not possible with Julia keywords
-(`for`, `do`, `if`, `begin`, `local`, ...): use a string for those. When Julia parses such a
-directive anyway (`@pragma omp declare_target local(x)`, `@pragma omp parallel for i in 1:n`),
-OMP.jl reports it and suggests the equivalent string; otherwise Julia itself reports a parse
-error.
-
-Directives are parsed and validated against the specification at macro expansion time
-(unknown or misplaced clauses, invalid modifiers, mutually exclusive or repeated clauses,
-missing required clauses, ...). Code generation is being implemented: `parallel` and `masked`
-are supported, and compound directives made of supported leafs (`parallel masked`). Other
-valid directives throw an `UnsupportedDirectiveError`. `OMP.Frontend.@pragma_ir` shows how a
-directive is parsed.
-
-Data-sharing clauses apply to variables, which are bindings: a private copy is a new binding
-(of the same value, for `firstprivate`). As in any Julia closure, assigning a global inside a
-region requires `global`. A user-defined reduction identifier is a function, whose identity
-is a method of `OMP.reduction_identity`.
 
 # API routines
 The OpenMP API of C's `omp.h` is exported by `OMP`, with the same names:
